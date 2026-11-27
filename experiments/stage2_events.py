@@ -1,14 +1,18 @@
 """Chronological diagnostics for complete holiday episodes and makeup workdays."""
 
 import argparse
+import hashlib
+import json
+import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 
-from experiments.baselines import DEFAULT_DAILY, _read_daily
+from experiments.baselines import DEFAULT_DAILY, _read_daily, _sha256
 from src.evaluation import Fold, predict_targets, score_forecast, split_fold
-from src.features.calendar import build_calendar
+from src.features.calendar import CONFIG, build_calendar
 from src.models.baselines import BASELINES, SeasonalMeanBaseline
 
 
@@ -44,6 +48,7 @@ def _hybrid(target: str) -> SeasonalMeanBaseline:
 def run_diagnostics(daily: pd.DataFrame, output: Path) -> None:
     from src.models.calendar_adjustment import CALENDAR_COLUMNS, CalendarAdjusted
 
+    started = perf_counter()
     scores = []
     daily_results = []
     for event in evaluation_events():
@@ -80,6 +85,26 @@ def run_diagnostics(daily: pd.DataFrame, output: Path) -> None:
     output.mkdir(parents=True, exist_ok=True)
     pd.DataFrame(scores).to_csv(output / "event_metrics.csv", index=False, lineterminator="\n")
     pd.concat(daily_results, ignore_index=True).to_csv(output / "event_predictions.csv", index=False, lineterminator="\n")
+    root = Path(__file__).resolve().parents[1]
+    try:
+        git_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True, stderr=subprocess.DEVNULL).strip()
+    except (OSError, subprocess.CalledProcessError):
+        git_head = None
+    scoped = daily[["report_date", "purchase", "redeem"]].sort_values("report_date")
+    logical_data = scoped.to_csv(index=False, date_format="%Y-%m-%d", lineterminator="\n").encode("utf-8")
+    manifest = {
+        "analysis": "complete holiday and makeup events forecast from the prior day",
+        "git_head": git_head,
+        "development_input_end": scoped["report_date"].max().date().isoformat(),
+        "development_input_sha256": hashlib.sha256(logical_data).hexdigest(),
+        "calendar_sha256": _sha256(CONFIG),
+        "source_sha256": {name: _sha256(root / name) for name in (
+            "experiments/stage2_events.py", "src/evaluation.py", "src/models/baselines.py", "src/models/calendar_adjustment.py"
+        )},
+        "comparison_count": len(scores) // 2,
+        "duration_seconds": perf_counter() - started,
+    }
+    (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"{len(scores) // 2} chronological event comparisons written to {output}")
 
 
