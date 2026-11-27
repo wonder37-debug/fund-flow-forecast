@@ -1,0 +1,889 @@
+{
+  "tables": {
+    "user_balance_table.csv": {
+      "rows": 2840421,
+      "columns": [
+        "user_id",
+        "report_date",
+        "tBalance",
+        "yBalance",
+        "total_purchase_amt",
+        "direct_purchase_amt",
+        "purchase_bal_amt",
+        "purchase_bank_amt",
+        "total_redeem_amt",
+        "consume_amt",
+        "transfer_amt",
+        "tftobal_amt",
+        "tftocard_amt",
+        "share_amt",
+        "category1",
+        "category2",
+        "category3",
+        "category4"
+      ],
+      "column_count": 18,
+      "source_dtypes": {
+        "user_id": "int64",
+        "report_date": "int64",
+        "tBalance": "int64",
+        "yBalance": "int64",
+        "total_purchase_amt": "int64",
+        "direct_purchase_amt": "int64",
+        "purchase_bal_amt": "int64",
+        "purchase_bank_amt": "int64",
+        "total_redeem_amt": "int64",
+        "consume_amt": "int64",
+        "transfer_amt": "int64",
+        "tftobal_amt": "int64",
+        "tftocard_amt": "int64",
+        "share_amt": "int64",
+        "category1": "float64",
+        "category2": "float64",
+        "category3": "float64",
+        "category4": "float64"
+      },
+      "missing_by_column": {
+        "user_id": 0,
+        "report_date": 0,
+        "tBalance": 0,
+        "yBalance": 0,
+        "total_purchase_amt": 0,
+        "direct_purchase_amt": 0,
+        "purchase_bal_amt": 0,
+        "purchase_bank_amt": 0,
+        "total_redeem_amt": 0,
+        "consume_amt": 0,
+        "transfer_amt": 0,
+        "tftobal_amt": 0,
+        "tftocard_amt": 0,
+        "share_amt": 0,
+        "category1": 2666682,
+        "category2": 2666682,
+        "category3": 2666682,
+        "category4": 2666682
+      },
+      "blank_rows": 0,
+      "duplicate_rows_beyond_first": 0,
+      "distinct_users": 28041,
+      "key_columns": [
+        "user_id",
+        "report_date"
+      ],
+      "duplicate_keys_beyond_first": 0,
+      "first_date": "2013-07-01",
+      "last_date": "2014-08-31",
+      "distinct_dates": 427
+    },
+    "user_profile_table.csv": {
+      "rows": 28041,
+      "columns": [
+        "user_id",
+        "sex",
+        "city",
+        "constellation"
+      ],
+      "column_count": 4,
+      "source_dtypes": {
+        "user_id": "int64",
+        "sex": "int64",
+        "city": "int64",
+        "constellation": "object"
+      },
+      "missing_by_column": {
+        "user_id": 0,
+        "sex": 0,
+        "city": 0,
+        "constellation": 0
+      },
+      "blank_rows": 0,
+      "duplicate_rows_beyond_first": 0,
+      "distinct_users": 28041,
+      "key_columns": [
+        "user_id"
+      ],
+      "duplicate_keys_beyond_first": 0,
+      "distinct_values_by_profile_field": {
+        "sex": 2,
+        "city": 7,
+        "constellation": 12
+      }
+    },
+    "mfd_day_share_interest.csv": {
+      "rows": 427,
+      "columns": [
+        "mfd_date",
+        "mfd_daily_yield",
+        "mfd_7daily_yield"
+      ],
+      "column_count": 3,
+      "source_dtypes": {
+        "mfd_date": "int64",
+        "mfd_daily_yield": "float64",
+        "mfd_7daily_yield": "float64"
+      },
+      "missing_by_column": {
+        "mfd_date": 0,
+        "mfd_daily_yield": 0,
+        "mfd_7daily_yield": 0
+      },
+      "blank_rows": 0,
+      "duplicate_rows_beyond_first": 0,
+      "key_columns": [
+        "mfd_date"
+      ],
+      "duplicate_keys_beyond_first": 0,
+      "first_date": "2013-07-01",
+      "last_date": "2014-08-31",
+      "distinct_dates": 427,
+      "negative_by_column": {
+        "mfd_daily_yield": 0,
+        "mfd_7daily_yield": 0
+      },
+      "zero_by_column": {
+        "mfd_daily_yield": 0,
+        "mfd_7daily_yield": 0
+      }
+    },
+    "mfd_bank_shibor.csv": {
+      "rows": 294,
+      "columns": [
+        "mfd_date",
+        "Interest_O_N",
+        "Interest_1_W",
+        "Interest_2_W",
+        "Interest_1_M",
+        "Interest_3_M",
+        "Interest_6_M",
+        "Interest_9_M",
+        "Interest_1_Y"
+      ],
+      "column_count": 9,
+      "source_dtypes": {
+        "mfd_date": "int64",
+        "Interest_O_N": "float64",
+        "Interest_1_W": "float64",
+        "Interest_2_W": "float64",
+        "Interest_1_M": "float64",
+        "Interest_3_M": "float64",
+        "Interest_6_M": "float64",
+        "Interest_9_M": "float64",
+        "Interest_1_Y": "float64"
+      },
+      "missing_by_column": {
+        "mfd_date": 0,
+        "Interest_O_N": 0,
+        "Interest_1_W": 0,
+        "Interest_2_W": 0,
+        "Interest_1_M": 0,
+        "Interest_3_M": 0,
+        "Interest_6_M": 0,
+        "Interest_9_M": 0,
+        "Interest_1_Y": 0
+      },
+      "blank_rows": 0,
+      "duplicate_rows_beyond_first": 0,
+      "key_columns": [
+        "mfd_date"
+      ],
+      "duplicate_keys_beyond_first": 0,
+      "first_date": "2013-07-01",
+      "last_date": "2014-08-29",
+      "distinct_dates": 294,
+      "negative_by_column": {
+        "Interest_O_N": 0,
+        "Interest_1_W": 0,
+        "Interest_2_W": 0,
+        "Interest_1_M": 0,
+        "Interest_3_M": 0,
+        "Interest_6_M": 0,
+        "Interest_9_M": 0,
+        "Interest_1_Y": 0
+      },
+      "zero_by_column": {
+        "Interest_O_N": 0,
+        "Interest_1_W": 0,
+        "Interest_2_W": 0,
+        "Interest_1_M": 0,
+        "Interest_3_M": 0,
+        "Interest_6_M": 0,
+        "Interest_9_M": 0,
+        "Interest_1_Y": 0
+      }
+    },
+    "comp_predict_table.csv": {
+      "rows": 3,
+      "columns": [
+        "report_date",
+        "purchase",
+        "redeem"
+      ],
+      "column_count": 3,
+      "source_dtypes": {
+        "report_date": "int64",
+        "purchase": "int64",
+        "redeem": "int64"
+      },
+      "missing_by_column": {
+        "report_date": 0,
+        "purchase": 0,
+        "redeem": 0
+      },
+      "blank_rows": 0,
+      "duplicate_rows_beyond_first": 0,
+      "key_columns": [
+        "report_date"
+      ],
+      "duplicate_keys_beyond_first": 0,
+      "first_date": "2014-09-01",
+      "last_date": "2014-09-03",
+      "distinct_dates": 3,
+      "negative_by_column": {
+        "purchase": 0,
+        "redeem": 0
+      },
+      "zero_by_column": {
+        "purchase": 0,
+        "redeem": 0
+      }
+    }
+  },
+  "profile_join": {
+    "transaction_rows_with_profile": 2840421,
+    "transaction_rows_without_profile": 0,
+    "transaction_users_without_profile": 0,
+    "profiles_without_transactions": 0
+  },
+  "transaction_date_coverage": {
+    "observed_dates": 427,
+    "calendar_dates": 427,
+    "missing_dates": []
+  },
+  "observation_history": {
+    "first_observed_month": {
+      "2013-07": 1600,
+      "2013-08": 863,
+      "2013-09": 778,
+      "2013-10": 1701,
+      "2013-11": 2590,
+      "2013-12": 2028,
+      "2014-01": 3312,
+      "2014-02": 4464,
+      "2014-03": 2561,
+      "2014-04": 2081,
+      "2014-05": 1646,
+      "2014-06": 1380,
+      "2014-07": 1542,
+      "2014-08": 1495
+    },
+    "last_observed_month": {
+      "2013-07": 100,
+      "2013-08": 98,
+      "2013-09": 112,
+      "2013-10": 309,
+      "2013-11": 535,
+      "2013-12": 581,
+      "2014-01": 1369,
+      "2014-02": 2401,
+      "2014-03": 1624,
+      "2014-04": 1733,
+      "2014-05": 1511,
+      "2014-06": 1360,
+      "2014-07": 1794,
+      "2014-08": 14514
+    },
+    "records_per_user": {
+      "count": 28041.0,
+      "mean": 101.29528190863378,
+      "std": 124.03586739467488,
+      "min": 1.0,
+      "25%": 1.0,
+      "50%": 16.0,
+      "75%": 197.0,
+      "max": 427.0
+    },
+    "record_count_buckets": {
+      "1": 10812,
+      "2–7": 2773,
+      "8–30": 1027,
+      "31–90": 1900,
+      "91–180": 3490,
+      "181–365": 6962,
+      "366+": 1077
+    },
+    "first_window_day_users": 441,
+    "first_observed_after_first_window_day": 27600,
+    "last_window_day_users": 12614
+  },
+  "activity": {
+    "known_zero_purchase_and_redeem_rows": 888089,
+    "missing_purchase_or_redeem_rows": 0,
+    "incomplete_purchase_dates": 0,
+    "incomplete_redeem_dates": 0
+  },
+  "amount_fields": {
+    "tBalance": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 52719,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 162862,
+        "100-999": 315234,
+        "1000-9999": 437583,
+        "10000-99999": 507145,
+        "100000-999999": 604128,
+        "1000000-9999999": 630764,
+        "10000000-99999999": 129129,
+        "100000000+": 857
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 5258521504290,
+      "daily_total_cents": 5258521504290,
+      "daily_missing_dates": 0
+    },
+    "yBalance": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 64742,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 162015,
+        "100-999": 313630,
+        "1000-9999": 435449,
+        "10000-99999": 504967,
+        "100000-999999": 601797,
+        "1000000-9999999": 628306,
+        "10000000-99999999": 128663,
+        "100000000+": 852
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 5238648718504,
+      "daily_total_cents": 5238648718504,
+      "daily_missing_dates": 0
+    },
+    "total_purchase_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 900058,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 1011794,
+        "100-999": 612463,
+        "1000-9999": 180809,
+        "10000-99999": 52849,
+        "100000-999999": 61276,
+        "1000000-9999999": 20454,
+        "10000000-99999999": 714,
+        "100000000+": 4
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 92591083456,
+      "daily_total_cents": 92591083456,
+      "daily_missing_dates": 0
+    },
+    "direct_purchase_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2671936,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 3537,
+        "100-999": 9913,
+        "1000-9999": 23828,
+        "10000-99999": 49076,
+        "100000-999999": 61066,
+        "1000000-9999999": 20347,
+        "10000000-99999999": 714,
+        "100000000+": 4
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 91903405244,
+      "daily_total_cents": 91903405244,
+      "daily_missing_dates": 0
+    },
+    "purchase_bal_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2757995,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 2154,
+        "100-999": 7135,
+        "1000-9999": 17075,
+        "10000-99999": 29298,
+        "100000-999999": 20776,
+        "1000000-9999999": 5564,
+        "10000000-99999999": 420,
+        "100000000+": 4
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 32799785370,
+      "daily_total_cents": 32799785370,
+      "daily_missing_dates": 0
+    },
+    "purchase_bank_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2746220,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 2027,
+        "100-999": 4142,
+        "1000-9999": 9061,
+        "10000-99999": 22332,
+        "100000-999999": 41603,
+        "1000000-9999999": 14769,
+        "10000000-99999999": 267,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 59103619874,
+      "daily_total_cents": 59103619874,
+      "daily_missing_dates": 0
+    },
+    "total_redeem_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2602270,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 2813,
+        "100-999": 17701,
+        "1000-9999": 77392,
+        "10000-99999": 83662,
+        "100000-999999": 42505,
+        "1000000-9999999": 13179,
+        "10000000-99999999": 893,
+        "100000000+": 6
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 72718297570,
+      "daily_total_cents": 72718297570,
+      "daily_missing_dates": 0
+    },
+    "consume_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2666682,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 2239,
+        "100-999": 16179,
+        "1000-9999": 73710,
+        "10000-99999": 61364,
+        "100000-999999": 17526,
+        "1000000-9999999": 2704,
+        "10000000-99999999": 17,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 13168295367,
+      "daily_total_cents": 13168295367,
+      "daily_missing_dates": 0
+    },
+    "transfer_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2764875,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 775,
+        "100-999": 2577,
+        "1000-9999": 8355,
+        "10000-99999": 26536,
+        "100000-999999": 25996,
+        "1000000-9999999": 10436,
+        "10000000-99999999": 865,
+        "100000000+": 6
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 59550002203,
+      "daily_total_cents": 59550002203,
+      "daily_missing_dates": 0
+    },
+    "tftobal_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2812858,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 511,
+        "100-999": 1428,
+        "1000-9999": 4311,
+        "10000-99999": 9772,
+        "100000-999999": 8736,
+        "1000000-9999999": 2772,
+        "10000000-99999999": 33,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 11525951532,
+      "daily_total_cents": 11525951532,
+      "daily_missing_dates": 0
+    },
+    "tftocard_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 2790467,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 305,
+        "100-999": 1270,
+        "1000-9999": 4463,
+        "10000-99999": 17509,
+        "100000-999999": 17673,
+        "1000000-9999999": 7964,
+        "10000000-99999999": 764,
+        "100000000+": 6
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 48024050671,
+      "daily_total_cents": 48024050671,
+      "daily_missing_dates": 0
+    },
+    "share_amt": {
+      "observed_rows": 2840421,
+      "missing_rows": 0,
+      "zero_rows": 943768,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 1070235,
+        "100-999": 650563,
+        "1000-9999": 172060,
+        "10000-99999": 3795,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 687678212,
+      "daily_total_cents": 687678212,
+      "daily_missing_dates": 0
+    },
+    "category1": {
+      "observed_rows": 173739,
+      "missing_rows": 2666682,
+      "zero_rows": 154344,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 62,
+        "100-999": 299,
+        "1000-9999": 4044,
+        "10000-99999": 5921,
+        "100000-999999": 7728,
+        "1000000-9999999": 1341,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 5385993442,
+      "daily_total_cents": 5385993442,
+      "daily_missing_dates": 0
+    },
+    "category2": {
+      "observed_rows": 173739,
+      "missing_rows": 2666682,
+      "zero_rows": 154026,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 86,
+        "100-999": 1006,
+        "1000-9999": 5465,
+        "10000-99999": 8476,
+        "100000-999999": 3908,
+        "1000000-9999999": 772,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 3175661566,
+      "daily_total_cents": 3175661566,
+      "daily_missing_dates": 0
+    },
+    "category3": {
+      "observed_rows": 173739,
+      "missing_rows": 2666682,
+      "zero_rows": 173350,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 4,
+        "1000-9999": 6,
+        "10000-99999": 38,
+        "100000-999999": 162,
+        "1000000-9999999": 162,
+        "10000000-99999999": 17,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 668134881,
+      "daily_total_cents": 668134881,
+      "daily_missing_dates": 0
+    },
+    "category4": {
+      "observed_rows": 173739,
+      "missing_rows": 2666682,
+      "zero_rows": 32622,
+      "negative_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 2171,
+        "100-999": 15642,
+        "1000-9999": 68274,
+        "10000-99999": 48709,
+        "100000-999999": 5913,
+        "1000000-9999999": 408,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "totals_withheld": false,
+      "raw_total_cents": 3938505478,
+      "daily_total_cents": 3938505478,
+      "daily_missing_dates": 0
+    }
+  },
+  "business_checks": {
+    "total_purchase_amt": {
+      "equation": "total_purchase_amt = direct_purchase_amt + share_amt",
+      "checked_rows": 2840421,
+      "incomplete_rows": 0,
+      "mismatch_rows": 0,
+      "affected_users": 0,
+      "mismatch_date_range": {
+        "first_date": null,
+        "last_date": null,
+        "distinct_dates": 0
+      },
+      "positive_residual_rows": 0,
+      "negative_residual_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 0,
+        "1000-9999": 0,
+        "10000-99999": 0,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "zero_components_in_mismatch_rows": {
+        "total_purchase_amt": 0,
+        "direct_purchase_amt": 0,
+        "share_amt": 0
+      }
+    },
+    "total_redeem_amt": {
+      "equation": "total_redeem_amt = consume_amt + transfer_amt",
+      "checked_rows": 2840421,
+      "incomplete_rows": 0,
+      "mismatch_rows": 0,
+      "affected_users": 0,
+      "mismatch_date_range": {
+        "first_date": null,
+        "last_date": null,
+        "distinct_dates": 0
+      },
+      "positive_residual_rows": 0,
+      "negative_residual_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 0,
+        "1000-9999": 0,
+        "10000-99999": 0,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "zero_components_in_mismatch_rows": {
+        "total_redeem_amt": 0,
+        "consume_amt": 0,
+        "transfer_amt": 0
+      }
+    },
+    "direct_purchase_amt": {
+      "equation": "direct_purchase_amt = purchase_bal_amt + purchase_bank_amt",
+      "checked_rows": 2840421,
+      "incomplete_rows": 0,
+      "mismatch_rows": 0,
+      "affected_users": 0,
+      "mismatch_date_range": {
+        "first_date": null,
+        "last_date": null,
+        "distinct_dates": 0
+      },
+      "positive_residual_rows": 0,
+      "negative_residual_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 0,
+        "1000-9999": 0,
+        "10000-99999": 0,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "zero_components_in_mismatch_rows": {
+        "direct_purchase_amt": 0,
+        "purchase_bal_amt": 0,
+        "purchase_bank_amt": 0
+      }
+    },
+    "transfer_amt": {
+      "equation": "transfer_amt = tftobal_amt + tftocard_amt",
+      "checked_rows": 2840421,
+      "incomplete_rows": 0,
+      "mismatch_rows": 0,
+      "affected_users": 0,
+      "mismatch_date_range": {
+        "first_date": null,
+        "last_date": null,
+        "distinct_dates": 0
+      },
+      "positive_residual_rows": 0,
+      "negative_residual_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 0,
+        "1000-9999": 0,
+        "10000-99999": 0,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "zero_components_in_mismatch_rows": {
+        "transfer_amt": 0,
+        "tftobal_amt": 0,
+        "tftocard_amt": 0
+      }
+    }
+  },
+  "categories": {
+    "all_four_missing_rows": 2666682,
+    "partially_missing_rows": 0,
+    "all_missing_with_positive_consumption": 0,
+    "all_observed_with_zero_consumption": 0,
+    "category_sum_matches": {
+      "equation": "consume_amt = category1 + category2 + category3 + category4",
+      "checked_rows": 173739,
+      "incomplete_rows": 2666682,
+      "mismatch_rows": 0,
+      "affected_users": 0,
+      "mismatch_date_range": {
+        "first_date": null,
+        "last_date": null,
+        "distinct_dates": 0
+      },
+      "positive_residual_rows": 0,
+      "negative_residual_rows": 0,
+      "absolute_nonzero_cents_by_band": {
+        "1-99": 0,
+        "100-999": 0,
+        "1000-9999": 0,
+        "10000-99999": 0,
+        "100000-999999": 0,
+        "1000000-9999999": 0,
+        "10000000-99999999": 0,
+        "100000000+": 0
+      },
+      "zero_components_in_mismatch_rows": {
+        "consume_amt": 0,
+        "category1": 0,
+        "category2": 0,
+        "category3": 0,
+        "category4": 0
+      }
+    }
+  },
+  "historical_external_availability": {
+    "fund_yield": {
+      "calendar_dates": 427,
+      "first_date": "2013-07-01",
+      "last_date": "2014-08-31",
+      "observed_dates": 427,
+      "unobserved_dates": 0,
+      "observed_weekend_dates": 122,
+      "unobserved_weekend_dates": 0,
+      "unobserved_weekday_dates": 0,
+      "complete_observed_dates": 427,
+      "available_by_column": {
+        "mfd_daily_yield": 427,
+        "mfd_7daily_yield": 427
+      }
+    },
+    "shibor": {
+      "calendar_dates": 427,
+      "first_date": "2013-07-01",
+      "last_date": "2014-08-31",
+      "observed_dates": 294,
+      "unobserved_dates": 133,
+      "observed_weekend_dates": 6,
+      "unobserved_weekend_dates": 116,
+      "unobserved_weekday_dates": 17,
+      "complete_observed_dates": 294,
+      "available_by_column": {
+        "Interest_O_N": 294,
+        "Interest_1_W": 294,
+        "Interest_2_W": 294,
+        "Interest_1_M": 294,
+        "Interest_3_M": 294,
+        "Interest_6_M": 294,
+        "Interest_9_M": 294,
+        "Interest_1_Y": 294
+      }
+    }
+  },
+  "future_external_availability": {
+    "fund_yield": {
+      "calendar_dates": 30,
+      "first_date": "2014-09-01",
+      "last_date": "2014-09-30",
+      "observed_dates": 0,
+      "unobserved_dates": 30,
+      "observed_weekend_dates": 0,
+      "unobserved_weekend_dates": 8,
+      "unobserved_weekday_dates": 22,
+      "complete_observed_dates": 0,
+      "available_by_column": {
+        "mfd_daily_yield": 0,
+        "mfd_7daily_yield": 0
+      }
+    },
+    "shibor": {
+      "calendar_dates": 30,
+      "first_date": "2014-09-01",
+      "last_date": "2014-09-30",
+      "observed_dates": 0,
+      "unobserved_dates": 30,
+      "observed_weekend_dates": 0,
+      "unobserved_weekend_dates": 8,
+      "unobserved_weekday_dates": 22,
+      "complete_observed_dates": 0,
+      "available_by_column": {
+        "Interest_O_N": 0,
+        "Interest_1_W": 0,
+        "Interest_2_W": 0,
+        "Interest_1_M": 0,
+        "Interest_3_M": 0,
+        "Interest_6_M": 0,
+        "Interest_9_M": 0,
+        "Interest_1_Y": 0
+      }
+    }
+  },
+  "submission_sample": {
+    "header_present": false,
+    "column_order": [
+      "report_date",
+      "purchase",
+      "redeem"
+    ],
+    "date_format": "YYYYMMDD",
+    "amount_format": "integer cents",
+    "rows": 3,
+    "dated_within_forecast_window": 3
+  }
+}

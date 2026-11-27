@@ -1,6 +1,11 @@
 # 原始竞赛数据与本地数据产物
 /Purchase Redemption Data/
 /data/raw/
+user_balance_table.csv
+user_profile_table.csv
+mfd_day_share_interest.csv
+mfd_bank_shibor.csv
+comp_predict_table.csv
 /data/cache/
 /data/interim/
 /data/processed/
