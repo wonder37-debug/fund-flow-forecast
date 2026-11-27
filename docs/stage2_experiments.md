@@ -1,4 +1,4 @@
-# 阶段二正式实验与第二次讨论材料
+# 阶段二正式实验
 
 阶段二在 2014 年 4—7 月四个整月开发折评估 19 个候选，共 76 个模型与月份组合。开发集冻结提交为 `192245c`。验证冻结记录后，由同一入口评估 8 月固定窗口中的全部 19 个候选。两阶段均无运行失败。新增模型在 8 月评估后没有调参。
 
@@ -42,7 +42,7 @@
 
 阻尼趋势只用于申购时具备开发证据，申购 MAPE 为 16.58%，两项均用趋势时赎回 MAPE 上升至 37.36%。固定的指数半衰期、节前后修正、月末修正和该套 ETS 配置均未改善相应主要对照。截尾均值在申购的 28 日窗每个星期只有四个样本，按约定未截去任何记录，因此该消融检验的是赎回端。其 8 月 16.72% 优于冻结选择的 18.55%，也优于阶段一 B3 的 17.24%。该观察保留为固定离线证据，不改变开发集选出的模型。 [8 月固定清单](../results/metrics/stage2-holdout/manifest.json)
 
-## 复现与当前节点
+## 复现
 
 ```powershell
 $python = '.\.venv\Scripts\python.exe'
@@ -50,7 +50,8 @@ $python = '.\.venv\Scripts\python.exe'
 & $python -m experiments.stage2 holdout --freeze data/cache/stage2-repro/development/freeze.json --output-dir data/cache/stage2-repro/holdout
 & $python -m experiments.stage2_events --output-dir data/cache/stage2-repro/events
 & $python -m experiments.stage2_figures --development results/metrics/stage2-development
+& $python -m experiments.stage2_forecast --output-dir data/cache/stage2-repro/september
 & $python -m pytest -q
 ```
 
-Windows、Python 3.13.5 上全仓 72 项测试通过。真实数据扰动测试将四个开发折截止日之后的申赎、人数、余额和利率改写，日历、趋势组合、ETS、融合共 16 组预测逐值保持一致。普通日、节日与步长输出见 `day_type_metrics.csv` 和 `horizon_metrics.csv`。当前按第二次讨论节点交付对照实验，9 月预测和阶段二 PR 留待讨论后完成。
+Windows、Python 3.13.5 上全仓 76 项测试通过。真实数据扰动测试将四个开发折截止日之后的申赎、人数、余额和利率改写，日历、趋势组合、ETS、融合共 16 组预测逐值保持一致。普通日、节日与步长输出见 `day_type_metrics.csv` 和 `horizon_metrics.csv`。第二次讨论确认主备安排后，按冻结参数拟合并生成了两份 [9 月预测](stage2_summary.md)。

@@ -1,0 +1,31 @@
+{
+  "models": {
+    "primary": "blend_equal",
+    "backup": "cal_workday"
+  },
+  "training_input": {
+    "sha256": "8ba0347752d5adaeffd264acde4402902148f1ba25927f56e9291e5fee7c1992",
+    "scope_start": "2013-07-01",
+    "scope_end": "2014-08-31",
+    "rows": 427,
+    "serialization": "sorted report_date,purchase,redeem UTF-8 CSV with LF and ISO dates"
+  },
+  "forecast_start": "2014-09-01",
+  "forecast_end": "2014-09-30",
+  "forecast_days": 30,
+  "format": "headerless YYYYMMDD,purchase_cents,redeem_cents, rounded half up",
+  "frozen_plan_sha256": "f9ae752a9898d8677defd50747dded06cc92924a805af4ec58581229d39c0ddb",
+  "calendar_sha256": "e590c378df853a03e0b1df9dc8c44a25dda7ec15441e0b600eeece1cd7a3a68b",
+  "holdout_manifest_lf_sha256": "e933e85582dd85635159d811563be07bf4b0fd621e5a088d98de6bd40a0efc5f",
+  "sample_sha256": "3feab0724a02f3fdf3e4ddb255d11aa66a2f2911904e80f4c5ac99ab9e893e7a",
+  "git_commit": "0b0dca4feb555b30a0aba0423ef4e265e73fee91",
+  "export_source_sha256": {
+    "experiments/stage2_forecast.py": "7fedae3f0da877385cdf489bbaa1033c2b73e82fe00718a860e8a096a8439316",
+    "src/submission.py": "b0f1f657d2fa3848838851a272903ab02617a0e4439f87b8401d9aae70e7729f"
+  },
+  "artifacts_sha256": {
+    "calendar_comparison.csv": "d6380c1f7ab1d9e36859ddb878a63ea2ccc5ba6d25875ab3769a78f015bbba2f",
+    "stage2_backup.csv": "d7931ac3ff6441f75bb9d7672ec2fcf20aeed7b31170217e6915a8389871aa64",
+    "stage2_primary.csv": "bdd4b7450d1307274b32e0a28d45fde4f7bee59720931d3a2a208b3c077963fd"
+  }
+}

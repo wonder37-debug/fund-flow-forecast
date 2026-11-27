@@ -1,0 +1,13 @@
+report_date,holiday,previous_holiday,next_holiday,is_holiday,is_makeup_workday,is_pre_holiday,is_post_holiday,primary_purchase,primary_redeem,backup_purchase,backup_redeem,primary_minus_backup_purchase,primary_minus_backup_redeem
+2014-09-03,,dragon_boat,mid_autumn,False,False,True,False,289090061,322010276,290225282,322010276,-1135221,0
+2014-09-04,,dragon_boat,mid_autumn,False,False,True,False,255611263,288478136,250548851,288478136,5062412,0
+2014-09-05,,dragon_boat,mid_autumn,False,False,True,False,245436258,275227420,248081527,275227420,-2645269,0
+2014-09-06,mid_autumn,mid_autumn,mid_autumn,True,False,False,False,143096043,183240710,118405402,153574555,24690641,29666155
+2014-09-07,mid_autumn,mid_autumn,mid_autumn,True,False,False,False,153368409,173263046,134660459,145212247,18707950,28050799
+2014-09-08,mid_autumn,mid_autumn,mid_autumn,True,False,False,False,261849686,308822117,209934555,258824685,51915131,49997432
+2014-09-09,,mid_autumn,national_day,False,False,False,True,293258773,329162909,306655401,329162909,-13396628,0
+2014-09-10,,mid_autumn,national_day,False,False,False,True,289903239,322010276,290225282,322010276,-322043,0
+2014-09-11,,mid_autumn,national_day,False,False,False,True,256311187,288478136,250548851,288478136,5762336,0
+2014-09-28,,mid_autumn,national_day,False,True,True,False,228222691,258026752,282615448,314739658,-54392757,-56712906
+2014-09-29,,mid_autumn,national_day,False,False,True,False,317185855,358819549,317566181,358819549,-380326,0
+2014-09-30,,mid_autumn,national_day,False,False,True,False,294548413,329162909,306655401,329162909,-12106988,0
