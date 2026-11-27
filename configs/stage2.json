@@ -1,0 +1,107 @@
+{
+  "candidates": [
+    {
+      "id": "B1",
+      "kind": "baseline",
+      "specs": {"purchase": "B1", "redeem": "B1"}
+    },
+    {
+      "id": "B3",
+      "kind": "baseline",
+      "specs": {"purchase": "B3", "redeem": "B3"}
+    },
+    {
+      "id": "B4",
+      "kind": "baseline",
+      "specs": {"purchase": "B4", "redeem": "B4"}
+    },
+    {
+      "id": "B5",
+      "kind": "baseline",
+      "specs": {"purchase": "B5", "redeem": "B5"}
+    },
+    {
+      "id": "B3+B4",
+      "kind": "baseline",
+      "specs": {"purchase": "B3", "redeem": "B4"}
+    },
+    {
+      "id": "B3+B5",
+      "kind": "baseline",
+      "specs": {"purchase": "B3", "redeem": "B5"}
+    },
+    {
+      "id": "ewm_weekday",
+      "kind": "recent_weekday",
+      "params": {"estimator": "mean", "half_life": 14},
+      "target_params": {"purchase": {"days": 28}, "redeem": {"days": 84}}
+    },
+    {
+      "id": "median_weekday",
+      "kind": "recent_weekday",
+      "params": {"estimator": "median"},
+      "target_params": {"purchase": {"days": 28}, "redeem": {"days": 84}}
+    },
+    {
+      "id": "trimmed_weekday",
+      "kind": "recent_weekday",
+      "params": {"estimator": "trimmed"},
+      "target_params": {"purchase": {"days": 28}, "redeem": {"days": 84}}
+    },
+    {
+      "id": "relative_median_weekday",
+      "kind": "recent_weekday",
+      "params": {"estimator": "relative_median"},
+      "target_params": {"purchase": {"days": 28}, "redeem": {"days": 84}}
+    },
+    {
+      "id": "level_weekday",
+      "kind": "level_weekday",
+      "params": {"level_days": 28, "profile_days": 84, "trend": false}
+    },
+    {
+      "id": "level_trend",
+      "kind": "level_weekday",
+      "params": {"level_days": 28, "profile_days": 84, "trend": true}
+    },
+    {
+      "id": "trend_purchase_b5",
+      "kind": "target_mix",
+      "members": {"purchase": "level_trend", "redeem": "B5"}
+    },
+    {
+      "id": "cal_holiday",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {"holidays": true, "makeup": "weekday", "edges": false, "month_end": false}
+    },
+    {
+      "id": "cal_workday",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {"holidays": true, "makeup": "workday", "edges": false, "month_end": false}
+    },
+    {
+      "id": "cal_edges",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {"holidays": true, "makeup": "workday", "edges": true, "month_end": false}
+    },
+    {
+      "id": "cal_month_end",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {"holidays": true, "makeup": "workday", "edges": false, "month_end": true}
+    },
+    {
+      "id": "weekly_log_ets",
+      "kind": "weekly_ets",
+      "params": {"days": 120}
+    },
+    {
+      "id": "blend_equal",
+      "kind": "mean_ensemble",
+      "members": ["cal_workday", "trend_purchase_b5"]
+    }
+  ]
+}
