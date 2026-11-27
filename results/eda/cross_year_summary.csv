@@ -1,0 +1,3 @@
+series,first_month_day,last_month_day,ratio_of_medians,median_day_ratio,pairs,pearson,spearman
+purchase,07-01,08-31,5.80611408,5.87213952,62,0.181104057,0.256326962
+redeem,07-01,08-31,16.9190304,16.566576,62,0.0496186691,-0.0763264587

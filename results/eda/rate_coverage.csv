@@ -1,0 +1,11 @@
+rate,history_days,available_days,missing_days,first_observation,last_observation,known_forecast_days_at_origin
+mfd_daily_yield,427,427,0,2013-07-01,2014-08-31,0
+mfd_7daily_yield,427,427,0,2013-07-01,2014-08-31,0
+Interest_O_N,427,294,133,2013-07-01,2014-08-29,0
+Interest_1_W,427,294,133,2013-07-01,2014-08-29,0
+Interest_2_W,427,294,133,2013-07-01,2014-08-29,0
+Interest_1_M,427,294,133,2013-07-01,2014-08-29,0
+Interest_3_M,427,294,133,2013-07-01,2014-08-29,0
+Interest_6_M,427,294,133,2013-07-01,2014-08-29,0
+Interest_9_M,427,294,133,2013-07-01,2014-08-29,0
+Interest_1_Y,427,294,133,2013-07-01,2014-08-29,0
