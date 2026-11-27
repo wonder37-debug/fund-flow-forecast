@@ -5,6 +5,7 @@
 /data/interim/
 /data/processed/
 /2.资金流入流出预测_实践指导书.pdf
+/ml_report.tex
 *.parquet
 
 # 模型权重与训练检查点
