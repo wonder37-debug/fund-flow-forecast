@@ -1,0 +1,6 @@
+parent,components,days_with_all_components,exact_days,net_gap_cent,absolute_gap_cent
+purchase,direct_purchase_amt+share_amt,427,427,0,0
+direct_purchase_amt,purchase_bal_amt+purchase_bank_amt,427,427,0,0
+redeem,consume_amt+transfer_amt,427,427,0,0
+transfer_amt,tftobal_amt+tftocard_amt,427,427,0,0
+consume_amt,category1+category2+category3+category4,427,427,0,0

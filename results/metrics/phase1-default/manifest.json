@@ -1,0 +1,106 @@
+{
+  "run_id": "phase1-default",
+  "started_at_utc": "2026-11-27T10:16:36.831745+00:00",
+  "seed": 42,
+  "deterministic_models": true,
+  "daily_input": "data\\processed\\daily.parquet",
+  "daily_sha256": "0c1f10537c2e3dfd9120df01c4e5ef28206b9da01ddd7ced82af5c588a3e3ccc",
+  "daily_rows": 427,
+  "daily_date_start": "2013-07-01",
+  "daily_date_end": "2014-08-31",
+  "submission_sample": "Purchase Redemption Data\\comp_predict_table.csv",
+  "submission_sample_sha256": "3feab0724a02f3fdf3e4ddb255d11aa66a2f2911904e80f4c5ac99ab9e893e7a",
+  "submission_sample_rows": 3,
+  "git_commit": "e2d617bcb01d0efce75b197f192df4a92ed17cf5",
+  "experiment_sources_dirty": false,
+  "experiment_source_sha256": {
+    "experiments/baselines.py": "4c47bab7b998d792073135b12d4de4252d2cbd6ec8d88ef272117edf2ef5650f",
+    "src/evaluation.py": "58d0b68be3aff203655c617ed79cc66d9d4847ab4706f60af2f58d0b4910e237",
+    "src/models/baselines.py": "69ec11793ba6005686f2cc59ae8ab9259d2db441246a38f464d6922cca86dce8",
+    "src/submission.py": "b0f1f657d2fa3848838851a272903ab02617a0e4439f87b8401d9aae70e7729f"
+  },
+  "python_version": "3.13.5",
+  "pandas_version": "2.2.3",
+  "numpy_version": "2.2.6",
+  "selection_horizon": "calendar-month",
+  "holdout_horizon": "calendar-month",
+  "training_window": "expanding",
+  "rolling_days": null,
+  "target_columns": [
+    "purchase",
+    "redeem"
+  ],
+  "training_columns_per_target": {
+    "purchase": [
+      "report_date",
+      "purchase"
+    ],
+    "redeem": [
+      "report_date",
+      "redeem"
+    ]
+  },
+  "future_calendar_columns": [
+    "report_date"
+  ],
+  "model_parameters": {
+    "B0": {
+      "code": "B0",
+      "history_days": null,
+      "group_by_weekday": false,
+      "calendar_features": []
+    },
+    "B1": {
+      "code": "B1",
+      "history_days": 28,
+      "group_by_weekday": false,
+      "calendar_features": []
+    },
+    "B2": {
+      "code": "B2",
+      "history_days": null,
+      "group_by_weekday": true,
+      "calendar_features": [
+        "weekday"
+      ]
+    },
+    "B3": {
+      "code": "B3",
+      "history_days": 28,
+      "group_by_weekday": true,
+      "calendar_features": [
+        "weekday"
+      ]
+    },
+    "B4": {
+      "code": "B4",
+      "history_days": 56,
+      "group_by_weekday": true,
+      "calendar_features": [
+        "weekday"
+      ]
+    },
+    "B5": {
+      "code": "B5",
+      "history_days": 84,
+      "group_by_weekday": true,
+      "calendar_features": [
+        "weekday"
+      ]
+    }
+  },
+  "weighted_mape_weights": {
+    "purchase": 0.45,
+    "redeem": 0.55
+  },
+  "bad_day_strict_threshold": 0.3,
+  "selection_criterion": "lowest mean weighted MAPE over four selection folds, ties by model code",
+  "selected_model": "B3",
+  "submission_cutoff": "2014-08-31",
+  "submission_training_start": "2013-07-01",
+  "submission_forecast_start": "2014-09-01",
+  "submission_forecast_end": "2014-09-30",
+  "submission_fit_predict_seconds": 0.0022499000187963247,
+  "submission_file": "submissions/phase1-default.csv",
+  "elapsed_seconds": 0.24863369995728135
+}

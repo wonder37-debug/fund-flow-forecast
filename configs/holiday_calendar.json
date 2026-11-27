@@ -1,0 +1,22 @@
+{
+  "coverage_start": "2013-07-01",
+  "coverage_end": "2014-10-07",
+  "sources": {
+    "2013": "https://www.sport.gov.cn/bgt/n4962/c649722/content.html",
+    "2014": "https://www.sport.gov.cn/bgt/n4961/c644255/content.html",
+    "statutory_2014": "https://www.ln.gov.cn/web/zwgkx/lnsrmzfgb/2014n/qk/2014n_dyq/gwywj/C02298C830654E08B8CDFC5E6A46E0D8/index.shtml"
+  },
+  "holidays": [
+    {"name": "mid_autumn", "start": "2013-09-19", "end": "2013-09-21", "statutory": ["2013-09-19"]},
+    {"name": "national_day", "start": "2013-10-01", "end": "2013-10-07", "statutory": ["2013-10-01", "2013-10-02", "2013-10-03"]},
+    {"name": "new_year", "start": "2014-01-01", "end": "2014-01-01", "statutory": ["2014-01-01"]},
+    {"name": "spring_festival", "start": "2014-01-31", "end": "2014-02-06", "statutory": ["2014-01-31", "2014-02-01", "2014-02-02"]},
+    {"name": "qingming", "start": "2014-04-05", "end": "2014-04-07", "statutory": ["2014-04-05"]},
+    {"name": "labor_day", "start": "2014-05-01", "end": "2014-05-03", "statutory": ["2014-05-01"]},
+    {"name": "dragon_boat", "start": "2014-05-31", "end": "2014-06-02", "statutory": ["2014-06-02"]},
+    {"name": "mid_autumn", "start": "2014-09-06", "end": "2014-09-08", "statutory": ["2014-09-08"]},
+    {"name": "national_day", "start": "2014-10-01", "end": "2014-10-07", "statutory": ["2014-10-01", "2014-10-02", "2014-10-03"]}
+  ],
+  "makeup_workdays": ["2013-09-22", "2013-09-29", "2013-10-12", "2014-01-26", "2014-02-08", "2014-05-04", "2014-09-28"],
+  "shopping_markers": {"2013-11-11": "double_11", "2013-12-12": "double_12", "2014-06-18": "618"}
+}
