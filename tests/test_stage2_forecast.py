@@ -63,3 +63,12 @@ def test_forecast_rejects_changed_validated_august(tmp_path, frozen_run, tamper)
     with pytest.raises(ValueError, match="August"):
         run_forecast(daily, freeze, holdout, sample, output)
     assert not output.exists()
+
+
+def test_forecast_accepts_git_newline_conversion_of_frozen_plan(tmp_path, frozen_run):
+    daily, freeze, holdout, sample = frozen_run
+    original = freeze.read_bytes()
+    clean = original.replace(b"\r\n", b"\n")
+    freeze.write_bytes(clean if original != clean else clean.replace(b"\n", b"\r\n"))
+    assert freeze.read_bytes() != original
+    assert run_forecast(daily, freeze, holdout, sample, tmp_path / "submission").exists()

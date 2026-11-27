@@ -1,6 +1,7 @@
 """Refit the frozen stage-two primary and backup through August and export September."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -16,7 +17,6 @@ from experiments.stage2 import (
     _data_fingerprint,
     _git_head,
     _read_scoped_daily,
-    _write_json,
     build_model_factory,
     read_freeze,
 )
@@ -35,10 +35,13 @@ CALENDAR_FLAGS = ("is_holiday", "is_makeup_workday", "is_pre_holiday", "is_post_
 
 def _validated_holdout(path: Path, freeze: Path, plan: dict, models: dict[str, str]) -> dict:
     manifest = json.loads(path.read_text(encoding="utf-8"))
+    frozen_lf = freeze.read_bytes().replace(b"\r\n", b"\n")
+    # Earlier runs recorded the hash before Git normalized the JSON line endings.
+    freeze_hashes = {hashlib.sha256(data).hexdigest() for data in (frozen_lf, frozen_lf.replace(b"\n", b"\r\n"))}
     if (
         manifest.get("role") != "holdout"
         or manifest.get("plan_sha256") != plan["plan_sha256"]
-        or manifest.get("freeze_file_sha256") != _sha256(freeze)
+        or manifest.get("freeze_file_sha256") not in freeze_hashes
         or manifest.get("selected_model") != models["primary"]
     ):
         raise ValueError("August evidence does not match the selected frozen plan")
@@ -101,7 +104,7 @@ def run_forecast(daily_path: Path, freeze: Path, holdout: Path, sample: Path, ou
             for role, forecast in forecasts.items()
         }
         _calendar_comparison(prepared / "calendar_comparison.csv", submissions)
-        _write_json(prepared / "manifest.json", {
+        manifest = {
             "models": models,
             "training_input": _data_fingerprint(history),
             "forecast_start": SUBMISSION_DATES[0].date().isoformat(),
@@ -110,14 +113,17 @@ def run_forecast(daily_path: Path, freeze: Path, holdout: Path, sample: Path, ou
             "format": "headerless YYYYMMDD,purchase_cents,redeem_cents, rounded half up",
             "frozen_plan_sha256": plan["plan_sha256"],
             "calendar_sha256": plan["calendar_sha256"],
-            "holdout_manifest_sha256": _sha256(holdout),
+            "holdout_manifest_lf_sha256": hashlib.sha256(holdout.read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
             "sample_sha256": _sha256(sample),
             "git_commit": _git_head(),
             "export_source_sha256": {name: _sha256(ROOT / name) for name in (
                 "experiments/stage2_forecast.py", "src/submission.py",
             )},
             "artifacts_sha256": {path.name: _sha256(path) for path in sorted(prepared.iterdir())},
-        })
+        }
+        (prepared / "manifest.json").write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n",
+        )
         prepared.rename(output)
     return output / "manifest.json"
 
