@@ -157,9 +157,17 @@ def score_target(actual: pd.Series, predicted: pd.Series) -> tuple[dict[str, flo
 
 
 def score_forecast(actual: pd.DataFrame, predicted: pd.DataFrame) -> tuple[dict[str, float | int], pd.DataFrame]:
-    if DATE_COLUMN in actual and DATE_COLUMN in predicted:
-        if not pd.DatetimeIndex(actual[DATE_COLUMN]).equals(pd.DatetimeIndex(predicted[DATE_COLUMN])):
-            raise ValueError("Actual and predicted dates must align")
+    if (DATE_COLUMN in actual) != (DATE_COLUMN in predicted):
+        raise ValueError("Provide dates on both the actual and predicted series")
+    if DATE_COLUMN in actual:
+        dates = pd.DatetimeIndex(actual[DATE_COLUMN])
+        if (
+            dates.hasnans
+            or dates.has_duplicates
+            or not dates.is_monotonic_increasing
+            or not dates.equals(pd.DatetimeIndex(predicted[DATE_COLUMN]))
+        ):
+            raise ValueError("Actual and predicted dates must be unique, ordered and aligned")
     result = {}
     daily_errors = {}
     for target in TARGET_COLUMNS:

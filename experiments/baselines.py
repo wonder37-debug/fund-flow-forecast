@@ -75,16 +75,20 @@ def _code_provenance() -> dict:
 def _read_daily(path: Path) -> pd.DataFrame:
     if path.suffix.lower() == ".parquet":
         daily = pd.read_parquet(path, columns=list(DAILY_COLUMNS))
+        dates = pd.to_datetime(daily[DATE_COLUMN], errors="raise")
     elif path.suffix.lower() == ".csv":
-        daily = pd.read_csv(path, usecols=list(DAILY_COLUMNS))
+        daily = pd.read_csv(path, usecols=list(DAILY_COLUMNS), dtype={DATE_COLUMN: "string"})
+        date_text = daily[DATE_COLUMN]
+        date_format = "%Y%m%d" if date_text.str.fullmatch(r"[0-9]{8}").all() else "%Y-%m-%d"
+        dates = pd.to_datetime(date_text, format=date_format, errors="raise")
     else:
         raise ValueError("Daily input must be a .parquet or .csv file")
 
-    daily[DATE_COLUMN] = pd.to_datetime(daily[DATE_COLUMN], errors="raise")
-    if daily[DATE_COLUMN].isna().any() or (daily[DATE_COLUMN] != daily[DATE_COLUMN].dt.normalize()).any():
+    if dates.isna().any() or (dates != dates.dt.normalize()).any():
         raise ValueError("Daily data must have valid dates at midnight")
-    if daily[DATE_COLUMN].dt.tz is not None:
+    if dates.dt.tz is not None:
         raise ValueError("Daily data dates must not use a time zone")
+    daily[DATE_COLUMN] = dates
     for target in TARGET_COLUMNS:
         values = daily[target]
         if not pd.api.types.is_integer_dtype(values) or values.isna().any() or (values < 0).any():

@@ -1,6 +1,6 @@
 # 阶段一评估协议
 
-从项目根目录运行。程序默认从 `data/processed/daily.parquet` 读取 `report_date`、`purchase` 和 `redeem`，两个目标均为每日合计的整数分。日期需覆盖对应训练窗和验证窗。
+从项目根目录运行。程序默认从 `data/processed/daily.parquet` 读取 `report_date`、`purchase` 和 `redeem`，两个目标均为每日合计的整数分。日期需覆盖对应训练窗和验证窗。以 CSV 作为日表输入时，日期采用统一的 `YYYY-MM-DD` 或 `YYYYMMDD` 格式。按日期评分时，真实和预测都需提供唯一、有序且一一对应的日期。
 
 ```powershell
 .venv/Scripts/python.exe -m experiments.baselines --run-id phase1-default

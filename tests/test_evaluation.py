@@ -194,6 +194,27 @@ def test_model_selection_uses_four_folds_and_ignores_holdout():
     assert summary.loc["B0", "weighted_mape_std"] == pytest.approx(np.std([0.1, 0.2, 0.3, 0.4], ddof=1))
 
 
+def test_scoring_rejects_unpaired_or_repeated_dates():
+    from src.evaluation import score_forecast
+
+    observed = daily_series("2014-05-01", "2014-05-02")
+    with pytest.raises(ValueError, match="dates"):
+        score_forecast(observed, observed.drop(columns="report_date").iloc[::-1])
+    with pytest.raises(ValueError, match="dates"):
+        score_forecast(observed, observed.iloc[::-1])
+    repeated = observed.assign(report_date=pd.Timestamp("2014-05-01"))
+    with pytest.raises(ValueError, match="dates"):
+        score_forecast(repeated, repeated)
+
+
+def test_experiment_accepts_consecutive_yyyymmdd_dates_in_csv(tmp_path: Path):
+    from experiments.baselines import _read_daily
+
+    daily_path = tmp_path / "daily.csv"
+    daily_path.write_text("report_date,purchase,redeem\n20140501,10,20\n20140502,15,25\n", encoding="utf-8")
+    assert _read_daily(daily_path)["report_date"].tolist() == [pd.Timestamp("2014-05-01"), pd.Timestamp("2014-05-02")]
+
+
 def test_submission_matches_headerless_sample_and_checks_forecast(tmp_path: Path):
     from src.submission import write_submission
 
