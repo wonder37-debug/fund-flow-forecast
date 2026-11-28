@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
+pytest.importorskip("sklearn")
+
 from src.models.machine_learning import forecast_target
 
 
