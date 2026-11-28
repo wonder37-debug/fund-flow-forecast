@@ -64,5 +64,5 @@ $python = '.\.venv\Scripts\python.exe'
 - [EDA 报告](docs/eda_report.md)、[日历口径](docs/calendar.md)
 - [评估协议](docs/evaluation_protocol.md)、[阶段一结果](docs/stage1_summary.md)
 - [阶段二设计](docs/stage2_design.md)、[阶段二实验](docs/stage2_experiments.md)、[阶段二总结](docs/stage2_summary.md)、[阶段二审查记录](docs/stage2_review.md)
-- [阶段三前置分析与研究提案](docs/stage3_design.md)、[线上提交记录](results/submissions/online_submissions.json)
+- [阶段三研究设计](docs/stage3_design.md)、[多步特征](docs/stage3_features.md)、[开发回测](docs/stage3_experiments.md)、[补班窗口分析](docs/stage3_makeup.md)、[线上提交记录](results/submissions/online_submissions.json)
 - [后续研究路线](docs/roadmap.md)

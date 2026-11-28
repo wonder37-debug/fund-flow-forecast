@@ -38,4 +38,6 @@
 
 **从公开实现借鉴残差倍率并复审边界。** Datawhale 的同题 Notebook 展示周期预测乘以线性回归估计的倍率，也有 XGBoost 对照。其残差实验读取预生成文件，示例循环还复用了申购输入给赎回函数。项目会单独生成每个截止点及每个目标的基线和残差，用自己的时间协议验证效果。另一公开仓库报告 143.5 的线上分数，留作来源自述。 [Datawhale 建模 Notebook](https://github.com/datawhalechina/team-learning-data-mining/blob/master/PurchaseAndRedemptionForecast/06%20%E5%BB%BA%E6%A8%A1%E9%A2%84%E6%B5%8B.ipynb) · [公开赛题实现](https://github.com/ChuanyuXue/The-Purchase-and-Redemption-Forecast-Challenge-baseline)
 
-首次讨论前仅完成数据复核、固定小实验和提案。设计确认后再实现正式候选与冻结流程。
+## 首次讨论与执行决定
+
+用户确认继续采用以上研究路线，保持 GitHub 仓库 `Public`，并要求用历史补班日和随后工作日的合计金额检验转出是否提前。配对结果与部分转出提前相容，但观察窗口总量随历史参照改变方向，因此初轮模型沿用补班工作日处理，避免从单次国庆前事件外推出额外金额修正。 [补班窗口分析](stage3_makeup.md) · [阶段三正式开发回测](stage3_experiments.md)
