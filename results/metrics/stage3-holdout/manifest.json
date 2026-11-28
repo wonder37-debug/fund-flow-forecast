@@ -1,0 +1,33 @@
+{
+  "stage": 3,
+  "role": "holdout",
+  "freeze_lf_sha256": "bdd2373bc631b9ab26486c5cf3fed1eac4cfe93339779e5a24df488ce22bbb59",
+  "models": {
+    "primary": "route_special",
+    "backup": "lightgbm_purchase_route_redeem"
+  },
+  "cutoff": "2014-07-31",
+  "dates": [
+    "2014-08-01",
+    "2014-08-31"
+  ],
+  "august_input": {
+    "sha256": "b32bf8cc0ab49025e2fadf95ebdff3f26b2eb642d76bfa5f20c77582c16c1302",
+    "hash_method": "ordered pandas row hashes plus ordered schema",
+    "start": "2014-08-01",
+    "end": "2014-08-31",
+    "rows": 31
+  },
+  "success_count": 24,
+  "failure_count": 0,
+  "git_commit": "f7a4802865c60b947303e13bedc64b5c3d427446",
+  "elapsed_seconds": 16.868480799952522,
+  "artifacts_sha256": {
+    "fold_metrics.csv": "8ead29f5020c6df0f6b62e1b5b35b9238327a875b143861157c094c86cca5e01",
+    "daily_predictions.csv": "9118372c62582cb2b7a75f7ada7d760d2a9a1cb92b8d0fa2f83ab2ddce16b6ae",
+    "day_type_metrics.csv": "bef7064ce9a03241a428c24d66a3a89b89bfc90f3e09c35660cffd70557eca77",
+    "horizon_metrics.csv": "ab6b6824e9971b5a55fab44315ab45ace3d2187389f318cc0b70aacd83ffbdba",
+    "feature_importance.csv": "f246027e8ac3b82295e2398a1faf8f8c4e49ad587febc9993cbe423e02f29685",
+    "failures.csv": "b5200c16e748cb484902f281615d958c3a411c47dd40f94fe1cd8a2f42001746"
+  }
+}

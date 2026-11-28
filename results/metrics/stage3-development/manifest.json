@@ -1,0 +1,479 @@
+{
+  "role": "development",
+  "stage": 3,
+  "config": {
+    "seed": 37,
+    "search": {
+      "strategy": "finite declared ablations and sensitivity checks on pre-August folds",
+      "ridge_alpha": [
+        15,
+        60
+      ],
+      "history_days": [
+        120,
+        180
+      ],
+      "residual_shrink": [
+        0,
+        0.35,
+        0.65
+      ],
+      "tree_depth": 2,
+      "tree_leaves": 4,
+      "tree_rounds": 65
+    },
+    "candidates": [
+      {
+        "id": "B3",
+        "stat": "B3"
+      },
+      {
+        "id": "cal_workday",
+        "stat": "cal_workday"
+      },
+      {
+        "id": "blend_equal",
+        "stat": "blend_equal"
+      },
+      {
+        "id": "trimmed_weekday",
+        "stat": "trimmed_weekday"
+      },
+      {
+        "id": "route_special",
+        "stat": "route_special"
+      },
+      {
+        "id": "ridge_calendar",
+        "groups": [
+          "calendar"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_lags",
+        "groups": [
+          "calendar",
+          "lags"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_rolling",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_trend",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_amount",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_amount",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_log_amount",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_log",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_stat_features",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "lightgbm_direct",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "lightgbm",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "max_depth": 2,
+            "num_leaves": 4,
+            "n_estimators": 65,
+            "learning_rate": 0.04,
+            "min_child_samples": 120,
+            "reg_lambda": 8,
+            "random_state": 37
+          }
+        }
+      },
+      {
+        "id": "lightgbm_relative_mae",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "lightgbm",
+          "objective": "direct_relative",
+          "loss": "relative_l1",
+          "lookback_days": 120,
+          "params": {
+            "max_depth": 2,
+            "num_leaves": 4,
+            "n_estimators": 65,
+            "learning_rate": 0.04,
+            "min_child_samples": 120,
+            "reg_lambda": 8,
+            "random_state": 37
+          }
+        }
+      },
+      {
+        "id": "huber_direct",
+        "groups": [
+          "calendar",
+          "lags",
+          "rolling",
+          "trend"
+        ],
+        "model": {
+          "estimator": "huber",
+          "objective": "direct_relative",
+          "lookback_days": 120,
+          "params": {
+            "alpha": 1.0
+          }
+        }
+      },
+      {
+        "id": "ridge_additive",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "additive",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio_long",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 180,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio_less_regularized",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 15
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio_stronger_adjustment",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.65,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio_business",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical",
+          "business"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "ridge_ratio_external",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical",
+          "business",
+          "external"
+        ],
+        "model": {
+          "estimator": "ridge",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "alpha": 60
+          }
+        }
+      },
+      {
+        "id": "lightgbm_ratio",
+        "groups": [
+          "calendar",
+          "trend",
+          "statistical"
+        ],
+        "model": {
+          "estimator": "lightgbm",
+          "objective": "log_residual",
+          "lookback_days": 120,
+          "shrink": 0.35,
+          "clip": 0.2,
+          "params": {
+            "max_depth": 2,
+            "num_leaves": 4,
+            "n_estimators": 65,
+            "learning_rate": 0.04,
+            "min_child_samples": 120,
+            "reg_lambda": 8,
+            "random_state": 37
+          }
+        }
+      }
+    ]
+  },
+  "config_sha256": "fde31dc55bd6a3bc905231c6102a4021fc5e9cfb0c13ec0fea31b5ff7858cd81",
+  "data": {
+    "sha256": "1607985a44d7678b6f0bb47a4edf4db37296269cc70201760a6250a6eebf6dfd",
+    "hash_method": "ordered pandas row hashes plus ordered schema",
+    "start": "2013-07-01",
+    "end": "2014-07-31",
+    "rows": 396
+  },
+  "git_commit": "87b20212fda43f0e7e9836519e308a41cea5130a",
+  "calendar_sha256": "e590c378df853a03e0b1df9dc8c44a25dda7ec15441e0b600eeece1cd7a3a68b",
+  "source_sha256": {
+    "experiments/stage2.py": "9bd34355ef0fe5fa4fb55294146ddbae0b1be8016007d79661d1d780f40c75a9",
+    "experiments/baselines.py": "4c47bab7b998d792073135b12d4de4252d2cbd6ec8d88ef272117edf2ef5650f",
+    "src/evaluation.py": "58d0b68be3aff203655c617ed79cc66d9d4847ab4706f60af2f58d0b4910e237",
+    "src/features/calendar.py": "87ad8b52682bcddf19c8c12c3d9e2ddf091c0c7dc9140fd002e02eb27238dbe8",
+    "src/models/baselines.py": "69ec11793ba6005686f2cc59ae8ab9259d2db441246a38f464d6922cca86dce8",
+    "src/models/calendar_adjustment.py": "73f3edb5cda53fc48116d4a98cb7638265597c628afb5dd64dc8ff739f7ae371",
+    "src/models/statistical.py": "d324f6bb1db76426a744450ebb8a369cab03033c3fb0eff73cdf85d59acf8511",
+    "experiments/stage3.py": "ed10ede26344713ea692710756ab79816c22d40b1a3de630ade516d952d33c80",
+    "src/features/multistep.py": "72f1c464266b25c199bfcead0c8e7b30eb897b3332f1b10ce64de9ac0dcebc4c",
+    "src/models/machine_learning.py": "6d6c5d1473bb21fbb527cd8967d09029b9755de6888d36e24868dcffa1f308de",
+    "requirements-stage3.txt": "7729bc314824536a84c17c54c90671bcf2940d1e163b26a35f1791b0192e0f39",
+    "configs/stage2.json": "fb99f65c9c4d2f27a7567db72d3ae553af8e67dbee59910b53e4c30e4798e3c1"
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scipy": "1.15.3",
+    "statsmodels": "0.14.5",
+    "pyarrow": "20.0.0",
+    "scikit-learn": "1.7.2",
+    "lightgbm": "4.6.0",
+    "platform": "Windows"
+  },
+  "folds": [
+    {
+      "role": "early",
+      "cutoff": "2014-01-31",
+      "days": 28
+    },
+    {
+      "role": "early",
+      "cutoff": "2014-02-28",
+      "days": 31
+    },
+    {
+      "role": "selection",
+      "cutoff": "2014-03-31",
+      "days": 30
+    },
+    {
+      "role": "selection",
+      "cutoff": "2014-04-30",
+      "days": 31
+    },
+    {
+      "role": "selection",
+      "cutoff": "2014-05-31",
+      "days": 30
+    },
+    {
+      "role": "selection",
+      "cutoff": "2014-06-30",
+      "days": 31
+    },
+    {
+      "role": "fixed30",
+      "cutoff": "2014-03-15",
+      "days": 30
+    },
+    {
+      "role": "fixed30",
+      "cutoff": "2014-05-15",
+      "days": 30
+    },
+    {
+      "role": "fixed30",
+      "cutoff": "2014-06-15",
+      "days": 30
+    },
+    {
+      "role": "fixed30",
+      "cutoff": "2014-07-01",
+      "days": 30
+    }
+  ],
+  "success_count": 230,
+  "failure_count": 0,
+  "provisional_candidate": "route_special",
+  "elapsed_seconds": 43.51850060001016,
+  "artifacts_sha256": {
+    "fold_metrics.csv": "8bae8a104ac4d46c9dc366fa33887d68471a2484b34a139a9706f13a44077892",
+    "daily_predictions.csv": "80727d48b86917a3e3c0e38eadfb42226eb97edc20d30c3dafabdd73add784a5",
+    "day_type_metrics.csv": "28a84bd8c5b344b67de178b01e8a4338a48e04c7da1d5c046baa8e412abb9797",
+    "horizon_metrics.csv": "3540e2bf19961bee3a02d6355febb7afa7b1235545c89f00fa0a6745d52fb819",
+    "feature_importance.csv": "1646916f8e1a2c93dce24969531258f7d703b0b973e952a5398a2273ff06b210",
+    "failures.csv": "b5200c16e748cb484902f281615d958c3a411c47dd40f94fe1cd8a2f42001746",
+    "selection_summary.csv": "ee1ce4c462011c68c7ec7e1b208c8a591e48dbca035e0f9bc75932374853c6ad"
+  }
+}

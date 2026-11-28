@@ -1,0 +1,6 @@
+{
+  "freeze_git_commit": "f7a4802865c60b947303e13bedc64b5c3d427446",
+  "freeze_lf_sha256": "bdd2373bc631b9ab26486c5cf3fed1eac4cfe93339779e5a24df488ce22bbb59",
+  "holdout_manifest_git_commit": "cf38a788b5a8f2f7f1cb1bc37aa123e9d10a41ce",
+  "holdout_manifest_lf_sha256": "6afe6540cfb9bf65b566faa49300d5ee2ff628f0f26b00dae3f32cf351530683"
+}

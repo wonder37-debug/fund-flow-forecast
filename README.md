@@ -58,10 +58,24 @@ $python = '.\.venv\Scripts\python.exe'
 
 [阶段二主预测](results/submissions/stage2/stage2_primary.csv) · [备选预测](results/submissions/stage2/stage2_backup.csv) · [特殊日期预测对照](results/submissions/stage2/calendar_comparison.csv)
 
+## 阶段三预测
+
+阶段三使用 `requirements-stage3.txt` 叠加固定版本的 scikit-learn 和 LightGBM。默认导出校验版本管理中固定的冻结记录和 8 月证据，再使用截至 2014-08-31 的 427 天历史生成预测。沿用 Windows、Python 3.13.5 可以复现发布文件。
+
+```powershell
+$python = '.\.venv\Scripts\python.exe'
+uv pip install --python $python -r requirements-stage3.txt
+& $python -m experiments.stage3_release forecast --output data/cache/stage3-repro/september
+& $python -m pytest -q
+```
+
+[阶段三主预测](results/submissions/stage3/stage3_primary.csv) · [备选预测](results/submissions/stage3/stage3_backup.csv) · [特殊日期对照](results/submissions/stage3/calendar_comparison.csv)
+
 ## 实验材料
 
 - [数据字典](docs/data_dictionary.md)、[数据质量审计](docs/data_audit.md)
 - [EDA 报告](docs/eda_report.md)、[日历口径](docs/calendar.md)
 - [评估协议](docs/evaluation_protocol.md)、[阶段一结果](docs/stage1_summary.md)
 - [阶段二设计](docs/stage2_design.md)、[阶段二实验](docs/stage2_experiments.md)、[阶段二总结](docs/stage2_summary.md)、[阶段二审查记录](docs/stage2_review.md)
+- [阶段三研究设计](docs/stage3_design.md)、[多步特征](docs/stage3_features.md)、[开发与留出实验](docs/stage3_experiments.md)、[阶段三总结](docs/stage3_summary.md)、[补班窗口分析](docs/stage3_makeup.md)、[线上提交记录](results/submissions/online_submissions.json)
 - [后续研究路线](docs/roadmap.md)
