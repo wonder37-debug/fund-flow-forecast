@@ -49,7 +49,7 @@ $python = '.\.venv\Scripts\python.exe'
 
 ## 阶段二预测
 
-使用冻结模型和通过核验的 8 月结果，拟合截至 2014-08-31 的历史，生成主预测和备选。复用仓库中的冻结记录时，按运行清单使用 Python 3.13.5 和 `requirements.txt` 中的依赖版本。
+默认使用审查后发布的冻结记录和 8 月评估证据。程序先与 `configs/stage2_release.json` 中钉住的指纹比对，再拟合截至 2014-08-31 的历史。复用仓库中的冻结记录时，使用 Python 3.13.5 和 `requirements.txt` 中的依赖版本。
 
 ```powershell
 $python = '.\.venv\Scripts\python.exe'
@@ -63,5 +63,5 @@ $python = '.\.venv\Scripts\python.exe'
 - [数据字典](docs/data_dictionary.md)、[数据质量审计](docs/data_audit.md)
 - [EDA 报告](docs/eda_report.md)、[日历口径](docs/calendar.md)
 - [评估协议](docs/evaluation_protocol.md)、[阶段一结果](docs/stage1_summary.md)
-- [阶段二设计](docs/stage2_design.md)、[阶段二实验](docs/stage2_experiments.md)、[阶段二总结](docs/stage2_summary.md)
+- [阶段二设计](docs/stage2_design.md)、[阶段二实验](docs/stage2_experiments.md)、[阶段二总结](docs/stage2_summary.md)、[阶段二审查记录](docs/stage2_review.md)
 - [后续研究路线](docs/roadmap.md)

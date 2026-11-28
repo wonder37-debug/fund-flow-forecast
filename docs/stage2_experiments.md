@@ -44,6 +44,8 @@
 
 ## 复现
 
+以下命令独立重跑开发和固定评估，并另外使用仓库中已核验的发布记录复现 9 月结果。独立重跑的冻结清单和 8 月清单只有在审核后分别固定两个预期指纹、并显式传给导出程序时，才用于它自己的预测。 [发布验证与独立重跑](stage2_review.md)
+
 ```powershell
 $python = '.\.venv\Scripts\python.exe'
 & $python -m experiments.stage2 develop --output-dir data/cache/stage2-repro/development
@@ -54,4 +56,4 @@ $python = '.\.venv\Scripts\python.exe'
 & $python -m pytest -q
 ```
 
-Windows、Python 3.13.5 上全仓 76 项测试通过。真实数据扰动测试将四个开发折截止日之后的申赎、人数、余额和利率改写，日历、趋势组合、ETS、融合共 16 组预测逐值保持一致。普通日、节日与步长输出见 `day_type_metrics.csv` 和 `horizon_metrics.csv`。第二次讨论确认主备安排后，按冻结参数拟合并生成了两份 [9 月预测](stage2_summary.md)。
+首次交付在 Windows、Python 3.13.5 上通过 76 项测试。审查后通过 151 项测试。真实数据扰动检查覆盖 19 个候选和全部五折，共 95 组预测保持逐值一致。普通日、节日与步长输出见 `day_type_metrics.csv` 和 `horizon_metrics.csv`。第二次讨论确认的两份 [9 月预测](stage2_summary.md) 在本次复验中保持逐字节一致。

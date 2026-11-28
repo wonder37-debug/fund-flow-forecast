@@ -23,6 +23,8 @@
 
 第二次讨论展示了逐折、逐日、按日历分类和预测步长的结果。用户认可按冻结的等权融合生成 9 月主预测、按纯日历模型生成备选。导出保留两套原配置，8 月结果只作为固定参考。两份预测和特殊日期差异见[阶段二总结](stage2_summary.md)。
 
+正式发布的可信指纹由独立 Git 证据提交固定，导出时验证冻结方案、8 月索引记录和训练数据。审查后使用同样的候选、切分与选型规则，从修改后的代码重新执行冻结和评估，原始记录留档。 [审查与信任边界](stage2_review.md)
+
 ## 参考
 
 - Hyndman、Athanasopoulos 的教材给出了时间切分、可加或可乘分解、阻尼趋势、移动假期处理和组合预测的对照切入点。[交叉验证](https://otexts.com/fpp3/toolbox.html) · [分解](https://otexts.com/fpp3/decomposition.html) · [指数平滑](https://otexts.com/fpp3/exponential-smoothing.html) · [移动假期与融合](https://otexts.com/fpp3/practical.html)
