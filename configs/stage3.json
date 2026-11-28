@@ -1,0 +1,104 @@
+{
+  "seed": 37,
+  "search": {
+    "strategy": "finite declared ablations and sensitivity checks on pre-August folds",
+    "ridge_alpha": [15, 60],
+    "history_days": [120, 180],
+    "residual_shrink": [0, 0.35, 0.65],
+    "tree_depth": 2,
+    "tree_leaves": 4,
+    "tree_rounds": 65
+  },
+  "candidates": [
+    {"id": "B3", "stat": "B3"},
+    {"id": "cal_workday", "stat": "cal_workday"},
+    {"id": "blend_equal", "stat": "blend_equal"},
+    {"id": "trimmed_weekday", "stat": "trimmed_weekday"},
+    {"id": "route_special", "stat": "route_special"},
+    {
+      "id": "ridge_calendar", "groups": ["calendar"],
+      "model": {"estimator": "ridge", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_lags", "groups": ["calendar", "lags"],
+      "model": {"estimator": "ridge", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_rolling", "groups": ["calendar", "lags", "rolling"],
+      "model": {"estimator": "ridge", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_trend", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "ridge", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_amount", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "ridge", "objective": "direct_amount", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_log_amount", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "ridge", "objective": "direct_log", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_stat_features", "groups": ["calendar", "lags", "rolling", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 60}}
+    },
+    {
+      "id": "lightgbm_direct", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "lightgbm", "objective": "direct_relative", "lookback_days": 120,
+                "params": {"max_depth": 2, "num_leaves": 4, "n_estimators": 65, "learning_rate": 0.04,
+                           "min_child_samples": 120, "reg_lambda": 8, "random_state": 37}}
+    },
+    {
+      "id": "lightgbm_relative_mae", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "lightgbm", "objective": "direct_relative", "loss": "relative_l1", "lookback_days": 120,
+                "params": {"max_depth": 2, "num_leaves": 4, "n_estimators": 65, "learning_rate": 0.04,
+                           "min_child_samples": 120, "reg_lambda": 8, "random_state": 37}}
+    },
+    {
+      "id": "huber_direct", "groups": ["calendar", "lags", "rolling", "trend"],
+      "model": {"estimator": "huber", "objective": "direct_relative", "lookback_days": 120, "params": {"alpha": 1.0}}
+    },
+    {
+      "id": "ridge_additive", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "additive", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_ratio", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_ratio_long", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 180, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_ratio_less_regularized", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 15}}
+    },
+    {
+      "id": "ridge_ratio_stronger_adjustment", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 120, "shrink": 0.65, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_ratio_business", "groups": ["calendar", "trend", "statistical", "business"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "ridge_ratio_external", "groups": ["calendar", "trend", "statistical", "business", "external"],
+      "model": {"estimator": "ridge", "objective": "log_residual", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"alpha": 60}}
+    },
+    {
+      "id": "lightgbm_ratio", "groups": ["calendar", "trend", "statistical"],
+      "model": {"estimator": "lightgbm", "objective": "log_residual", "lookback_days": 120, "shrink": 0.35, "clip": 0.2,
+                "params": {"max_depth": 2, "num_leaves": 4, "n_estimators": 65, "learning_rate": 0.04,
+                           "min_child_samples": 120, "reg_lambda": 8, "random_state": 37}}
+    }
+  ]
+}
