@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "competition_url": "https://tianchi.aliyun.com/competition/entrance/231573/information",
+  "submissions": [
+    {
+      "id": "stage2_backup",
+      "model": "cal_workday",
+      "csv_path": "results/submissions/stage2/stage2_backup.csv",
+      "csv_sha256": "d7931ac3ff6441f75bb9d7672ec2fcf20aeed7b31170217e6915a8389871aa64",
+      "code_commit": "0b0dca4feb555b30a0aba0423ef4e265e73fee91",
+      "artifact_commit": "561c07c527df141d23007023d6cf315680291efe",
+      "config_path": "configs/stage2.json",
+      "export_manifest_path": "results/submissions/stage2/manifest.json",
+      "offline": {
+        "development_period": "2014-04 through 2014-07",
+        "development_equal_fold_weighted_mape": 0.1861317388101023,
+        "holdout_period": "2014-08",
+        "holdout_weighted_mape": 0.1793057863216763
+      },
+      "online": {
+        "status": "submitted",
+        "score": 111.9770,
+        "score_source": "user_reported",
+        "submitted_at": null,
+        "leaderboard": null
+      }
+    },
+    {
+      "id": "stage2_primary",
+      "model": "blend_equal",
+      "csv_path": "results/submissions/stage2/stage2_primary.csv",
+      "csv_sha256": "bdd4b7450d1307274b32e0a28d45fde4f7bee59720931d3a2a208b3c077963fd",
+      "code_commit": "0b0dca4feb555b30a0aba0423ef4e265e73fee91",
+      "artifact_commit": "561c07c527df141d23007023d6cf315680291efe",
+      "config_path": "configs/stage2.json",
+      "export_manifest_path": "results/submissions/stage2/manifest.json",
+      "offline": {
+        "development_period": "2014-04 through 2014-07",
+        "development_equal_fold_weighted_mape": 0.1811770811227816,
+        "holdout_period": "2014-08",
+        "holdout_weighted_mape": 0.1854911759933588
+      },
+      "online": {
+        "status": "unknown",
+        "score": null,
+        "score_source": null,
+        "submitted_at": null,
+        "leaderboard": null
+      }
+    }
+  ]
+}
