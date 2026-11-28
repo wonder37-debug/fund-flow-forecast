@@ -183,7 +183,7 @@ def _read_scoped_daily(path: Path, last_date: pd.Timestamp) -> pd.DataFrame:
 
     if dates.dt.tz is not None or dates.isna().any() or (dates != dates.dt.normalize()).any():
         raise ValueError("Daily data must have valid dates at midnight without a time zone")
-    daily[DATE_COLUMN] = dates
+    daily[DATE_COLUMN] = dates.astype("datetime64[ns]")
     for target in TARGET_COLUMNS:
         values = daily[target]
         if not pd.api.types.is_integer_dtype(values) or values.isna().any() or (values < 0).any():

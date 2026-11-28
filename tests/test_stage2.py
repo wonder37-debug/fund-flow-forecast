@@ -3,7 +3,8 @@ import json
 import pandas as pd
 import pytest
 
-from experiments.stage2 import run_development, run_holdout, select_candidate
+from experiments.stage2 import DEVELOPMENT_END, _read_scoped_daily, run_development, run_holdout, select_candidate
+from src.evaluation import build_folds, split_fold
 
 
 def _write_daily(path, end="2014-08-31"):
@@ -102,6 +103,22 @@ def test_development_does_not_validate_august_amounts(tmp_path):
     assert freeze_path.exists()
     with pytest.raises(ValueError, match="purchase"):
         run_holdout(daily, freeze_path, tmp_path / "holdout")
+
+
+@pytest.mark.parametrize("unit", ["ms", "us"])
+def test_parquet_datetime_unit_preserves_daily_split(tmp_path, unit):
+    csv_path = tmp_path / "daily.csv"
+    _write_daily(csv_path)
+    parquet_path = tmp_path / "daily.parquet"
+    daily = pd.read_csv(csv_path, parse_dates=["report_date"])
+    daily["report_date"] = daily["report_date"].dt.as_unit(unit)
+    daily.to_parquet(parquet_path, index=False)
+
+    from_csv = _read_scoped_daily(csv_path, DEVELOPMENT_END)
+    from_parquet = _read_scoped_daily(parquet_path, DEVELOPMENT_END)
+    fold = build_folds()[0]
+    for csv_frame, parquet_frame in zip(split_fold(from_csv, fold), split_fold(from_parquet, fold)):
+        pd.testing.assert_frame_equal(parquet_frame, csv_frame)
 
 
 def test_candidate_constructor_error_is_recorded_without_interrupting_other_models(tmp_path):

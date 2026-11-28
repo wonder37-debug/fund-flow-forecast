@@ -10,10 +10,11 @@ from time import perf_counter
 
 import pandas as pd
 
-from experiments.baselines import DEFAULT_DAILY, _read_daily, _sha256
+from experiments.baselines import DEFAULT_DAILY, _sha256
+from experiments.stage2 import DEVELOPMENT_END, _read_scoped_daily
 from src.evaluation import Fold, predict_targets, score_forecast, split_fold
 from src.features.calendar import CONFIG, build_calendar
-from src.models.baselines import BASELINES, SeasonalMeanBaseline
+from src.models.baselines import BASELINES, DATE_COLUMN, SeasonalMeanBaseline
 
 
 @dataclass(frozen=True)
@@ -24,7 +25,7 @@ class Event:
 
 
 def evaluation_events() -> tuple[Event, ...]:
-    calendar = build_calendar("2013-07-01", "2014-07-31")
+    calendar = build_calendar("2013-07-01", DEVELOPMENT_END)
     labels = calendar["holiday"].fillna("")
     episodes = labels.ne(labels.shift(fill_value="")).cumsum()
     events = []
@@ -48,6 +49,7 @@ def _hybrid(target: str) -> SeasonalMeanBaseline:
 def run_diagnostics(daily: pd.DataFrame, output: Path) -> None:
     from src.models.calendar_adjustment import CALENDAR_COLUMNS, CalendarAdjusted
 
+    daily = daily.loc[daily[DATE_COLUMN].le(DEVELOPMENT_END)]
     started = perf_counter()
     scores = []
     daily_results = []
@@ -113,8 +115,7 @@ def main() -> None:
     parser.add_argument("--daily", type=Path, default=DEFAULT_DAILY)
     parser.add_argument("--output-dir", type=Path, default=Path("results/metrics/stage2-events"))
     args = parser.parse_args()
-    daily = _read_daily(args.daily)
-    run_diagnostics(daily.loc[daily["report_date"].le("2014-07-31")].copy(), args.output_dir)
+    run_diagnostics(_read_scoped_daily(args.daily, DEVELOPMENT_END), args.output_dir)
 
 
 if __name__ == "__main__":
