@@ -1,0 +1,31 @@
+{
+  "analysis": "historical makeup workday and subsequent ordinary workdays",
+  "history_start": "2013-07-01",
+  "history_end": "2014-08-31",
+  "history_cutoff": "2014-08-31",
+  "daily_columns": [
+    "report_date",
+    "transfer_amt",
+    "tftocard_amt",
+    "redeem"
+  ],
+  "daily_sha256": "05da9303a2214446cb3c2d1d23e6450d52a33508213550fe334d7499a975e58d",
+  "calendar_sha256": "e590c378df853a03e0b1df9dc8c44a25dda7ec15441e0b600eeece1cd7a3a68b",
+  "source_sha256": "498fd7ff1ffbff69e9634c335a79f9eda60473d6d678145f523a4c88cea421c1",
+  "designs": {
+    "primary": {
+      "lookback_days": 56,
+      "followup_days": 1
+    },
+    "short_lookback": {
+      "lookback_days": 28,
+      "followup_days": 1
+    },
+    "two_followups": {
+      "lookback_days": 56,
+      "followup_days": 2
+    }
+  },
+  "minimum_reference_pairs": 2,
+  "material_change_pct": 10.0
+}
