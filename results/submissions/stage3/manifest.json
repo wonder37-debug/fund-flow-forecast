@@ -1,0 +1,27 @@
+{
+  "stage": 3,
+  "models": {
+    "primary": "route_special",
+    "backup": "lightgbm_purchase_route_redeem"
+  },
+  "git_commit": "10136d329339e57c9fa8611f3fd1397cbf8b1964",
+  "freeze_lf_sha256": "bdd2373bc631b9ab26486c5cf3fed1eac4cfe93339779e5a24df488ce22bbb59",
+  "holdout_manifest_lf_sha256": "6afe6540cfb9bf65b566faa49300d5ee2ff628f0f26b00dae3f32cf351530683",
+  "training_input": {
+    "sha256": "b436f74e04f44126fe72abb5b419dac9db6be38f95bcfad08f6e43e5b0edb130",
+    "hash_method": "ordered pandas row hashes plus ordered schema",
+    "start": "2013-07-01",
+    "end": "2014-08-31",
+    "rows": 427
+  },
+  "forecast_start": "2014-09-01",
+  "forecast_end": "2014-09-30",
+  "forecast_days": 30,
+  "format": "headerless YYYYMMDD,purchase_cents,redeem_cents, half-up",
+  "sample_sha256": "3feab0724a02f3fdf3e4ddb255d11aa66a2f2911904e80f4c5ac99ab9e893e7a",
+  "artifacts_sha256": {
+    "calendar_comparison.csv": "36c1b82a977e2ad507fa8bd10e28fa0dffc3cb718377686fc143ed0fa1551a9b",
+    "stage3_backup.csv": "12b48f16e1607c9330b634537aac5968e289dc34a603195e767b10336a89cec3",
+    "stage3_primary.csv": "af97b48dfb5b549e8c59536b954967ef4cf572edd7d1a97dac40bc9978ea80ba"
+  }
+}
