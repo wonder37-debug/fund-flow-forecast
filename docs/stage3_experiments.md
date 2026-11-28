@@ -1,6 +1,6 @@
 # 阶段三正式开发回测
 
-代码 `87b2021` 在 2014 年 4–7 月四个整月开发窗口、2–3 月两个较早整月窗口以及四个固定 30 天窗口执行 **23 个候选 × 10 折，共 230 组，0 个运行失败**。固定 30 天从 3 月 15 日、5 月 15 日、6 月 15 日、7 月 1 日的历史截止点开始，窗口可与主协议重叠，单独使用。整个开发流程的输入范围截止 2014-07-31。8 月的阶段三正式评估留到第二次讨论和候选冻结之后。 [实验 Manifest](../results/metrics/stage3-development/manifest.json)
+代码 `87b2021` 在 2014 年 4–7 月四个整月开发窗口、2–3 月两个较早整月窗口以及四个固定 30 天窗口执行 **23 个候选 × 10 折，共 230 组，0 个运行失败**。固定 30 天从 3 月 15 日、5 月 15 日、6 月 15 日、7 月 1 日的历史截止点开始，窗口可与主协议重叠，单独使用。整个开发流程的输入范围截止 2014-07-31。第二次讨论并提交冻结方案后才执行 8 月正式评估。 [实验 Manifest](../results/metrics/stage3-development/manifest.json)
 
 ## 完整开发结果
 
@@ -41,9 +41,13 @@
 
 在完成上述比较后，额外用已存逐日预测回算了一个分目标组合，只有申购采用 `lightgbm_ratio`，赎回保留 `route_special`。4–7 月加权 MAPE **16.57%**，普通日严重误差率 **13.45%**，普通日月间 MAPE 标准差 **4.12 个百分点**（纯日型切换为 **3.77**）。四个固定 30 天窗口平均 **22.09%**，2–3 月 **60.14%**，两项都高于纯日型切换（21.08%、54.25%）。这是根据开发结果提出的备选假设，初轮配置、指标表和暂定统计方案均保留。
 
+## 8 月固定评估
+
+`f7a4802` 在运行留出评估前固定了主备角色和 24 个候选。使用至 7 月 31 日的已知历史一次性预测 8 月 31 天，共完成 **24 组，0 个运行失败**。此月全为普通日期，`route_special` 与 `blend_equal` 逐日相同。申购增强备选在 8 月的申购 MAPE 为 **14.90%**，统计主模型为 **14.73%**，开发集的申购改善未复现。几个直接 Ridge 在 8 月较强，`ridge_trend` 达到 **15.83%**，4–7 月为 **31.59%**。该结果保留用于理解阶段差异，发布模型沿用事先冻结的角色。 [全部 8 月指标](../results/metrics/stage3-holdout/fold_metrics.csv) · [8 月逐日预测](../results/metrics/stage3-holdout/daily_predictions.csv) · [8 月 Manifest](../results/metrics/stage3-holdout/manifest.json)
+
 ## 复验
 
-Windows 和 Python 3.13.5 实际运行 **189 项**测试。开发流程从同一数据和配置再次运行，6,923 条模型逐日预测、逐折指标、分组结果及特征重要性逐值一致，耗时字段按实际运行分别记录。另取 4 月和 7 月两折作真实数据扰动，修改相应截止日之后 122 天和 31 天的申购、赎回、观察及交易人数、银行渠道、转出、余额、基金收益率和隔夜利率。重新构造特征和拟合全部 23 个候选，**46 个拟合预测逐值一致**。阶段二的四个统计对照在四折的 488 条记录上逐值复现，原有两份 9 月预测 CSV 仍与发布文件逐字节一致。
+Windows 和 Python 3.13.5 实际运行 **192 项**测试。开发流程从同一数据和配置再次运行，6,923 条模型逐日预测、逐折指标、分组结果及特征重要性逐值一致，耗时字段按实际运行分别记录。另取 4 月和 7 月两折作真实数据扰动，修改相应截止日之后 122 天和 31 天的申购、赎回、观察及交易人数、银行渠道、转出、余额、基金收益率和隔夜利率。重新构造特征和拟合全部 23 个候选，**46 个拟合预测逐值一致**。阶段二的四个统计对照在开发和 8 月的 **612 条**记录上逐值复现，原有两份 9 月预测 CSV 仍与发布文件逐字节一致。向发布输入追加含错误业务字段的 30 条 9 月模拟记录，阶段三两份 CSV 和日型对照逐字节一致。修改 8 月结果文件和清单内的文件哈希，独立固定的清单指纹仍会拒绝导出。
 
 ```powershell
 $python = '.\.venv\Scripts\python.exe'
@@ -51,5 +55,9 @@ uv pip install --python $python -r requirements-stage3.txt
 & $python -m experiments.stage3 develop --output-dir data/cache/stage3-repro/development
 & $python -m experiments.stage3_figures --metrics data/cache/stage3-repro/development --output data/cache/stage3-repro/development.png
 & $python -m experiments.stage3_makeup --output-dir data/cache/stage3-repro/makeup
+& $python -m experiments.stage3_release holdout --output data/cache/stage3-repro/august
+& $python -m experiments.stage3_release forecast --output data/cache/stage3-repro/september
 & $python -m pytest -q
 ```
+
+`holdout` 的重跑清单包含新运行时间和版本。默认 `forecast` 使用提交中的正式 8 月证据。独立复验要生成自己的发布产物时，先审核并固定冻结与重跑清单的 LF SHA256，再同时通过 `--expected-freeze-sha256` 和 `--expected-holdout-sha256` 传入，并用 `--holdout` 指向重跑清单。指纹用于验证实验发布的完整性与一致性，信任来源是已审核的 Git 证据。

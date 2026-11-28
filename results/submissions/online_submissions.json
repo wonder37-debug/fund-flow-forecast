@@ -19,7 +19,7 @@
       },
       "online": {
         "status": "submitted",
-        "score": 111.9770,
+        "score": 111.977,
         "score_source": "user_reported",
         "submitted_at": null,
         "leaderboard": null
@@ -42,6 +42,54 @@
       },
       "online": {
         "status": "unknown",
+        "score": null,
+        "score_source": null,
+        "submitted_at": null,
+        "leaderboard": null
+      }
+    },
+    {
+      "id": "stage3_primary",
+      "model": "route_special",
+      "csv_path": "results/submissions/stage3/stage3_primary.csv",
+      "csv_sha256": "af97b48dfb5b549e8c59536b954967ef4cf572edd7d1a97dac40bc9978ea80ba",
+      "code_commit": "10136d329339e57c9fa8611f3fd1397cbf8b1964",
+      "artifact_commit": "8b2118bc66e23ed777e4f6e21de95b6f51253944",
+      "config_path": "results/metrics/stage3-freeze/freeze.json",
+      "export_manifest_path": "results/submissions/stage3/manifest.json",
+      "offline": {
+        "development_period": "2014-04 through 2014-07",
+        "development_equal_fold_weighted_mape": 0.17125997880396732,
+        "development_evidence": "initial_grid",
+        "holdout_period": "2014-08",
+        "holdout_weighted_mape": 0.18549117599335885
+      },
+      "online": {
+        "status": "not_submitted",
+        "score": null,
+        "score_source": null,
+        "submitted_at": null,
+        "leaderboard": null
+      }
+    },
+    {
+      "id": "stage3_backup",
+      "model": "lightgbm_purchase_route_redeem",
+      "csv_path": "results/submissions/stage3/stage3_backup.csv",
+      "csv_sha256": "12b48f16e1607c9330b634537aac5968e289dc34a603195e767b10336a89cec3",
+      "code_commit": "10136d329339e57c9fa8611f3fd1397cbf8b1964",
+      "artifact_commit": "8b2118bc66e23ed777e4f6e21de95b6f51253944",
+      "config_path": "results/metrics/stage3-freeze/freeze.json",
+      "export_manifest_path": "results/submissions/stage3/manifest.json",
+      "offline": {
+        "development_period": "2014-04 through 2014-07",
+        "development_equal_fold_weighted_mape": 0.1656515620892851,
+        "development_evidence": "posthoc_combination_of_saved_target_predictions",
+        "holdout_period": "2014-08",
+        "holdout_weighted_mape": 0.18625746215880531
+      },
+      "online": {
+        "status": "not_submitted",
         "score": null,
         "score_source": null,
         "submitted_at": null,
