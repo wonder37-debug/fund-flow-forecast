@@ -1,6 +1,9 @@
 """Cutoff-fitted statistical models for known future dates."""
 
 import warnings
+from bisect import bisect_left, bisect_right
+from fractions import Fraction
+from itertools import accumulate
 from numbers import Integral
 from typing import Self
 
@@ -95,11 +98,17 @@ class RecentWeekday(_DateModel):
         weights = np.exp2(log_weights - log_weights.max())
         if self.estimator in {"mean", "trimmed"}:
             return float(np.average(values, weights=weights))
-        cumulative = np.cumsum(weights)
+        # Sum the represented weights exactly so small weights cannot create a false tie.
+        cumulative = list(accumulate(Fraction.from_float(float(weight)) for weight in weights))
         midpoint = cumulative[-1] / 2
-        lower = cumulative.searchsorted(midpoint, side="left")
-        upper = cumulative.searchsorted(midpoint, side="right")
-        return float(values[lower] / 2 + values[upper] / 2)
+        lower = bisect_left(cumulative, midpoint)
+        upper = bisect_right(cumulative, midpoint)
+        if lower == upper:
+            return float(values[lower])
+        # Round the midpoint once, including when the endpoints are subnormal or near the float limit.
+        lower_amount = Fraction.from_float(float(values[lower]))
+        upper_amount = Fraction.from_float(float(values[upper]))
+        return float((lower_amount + upper_amount) / 2)
 
     def fit(self, history: pd.DataFrame) -> Self:
         dates, values = self._training_values(history, self.days)

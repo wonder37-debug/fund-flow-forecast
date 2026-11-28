@@ -46,6 +46,75 @@ def test_robust_weekday_estimators_limit_the_effect_of_outliers(estimator, expec
     assert forecast.iloc[0] == pytest.approx(expected)
 
 
+@pytest.mark.parametrize(
+    ("amounts", "expected"),
+    [
+        pytest.param([150, 1, 100, 1000, 90], 100, id="odd"),
+        pytest.param([1000, 90, 1, 150], 120, id="even"),
+        pytest.param([123], 123, id="singleton"),
+        pytest.param([100, 2, 2, 10, 2], 2, id="duplicate-amounts"),
+        pytest.param([0, 20, 0], 0, id="zero-amounts"),
+    ],
+)
+def test_equally_weighted_weekday_median(amounts, expected):
+    dates = pd.date_range("2024-01-01", periods=len(amounts), freq="W-MON")
+    model = RecentWeekday("purchase", 35, estimator="median").fit(_history(dates, amounts))
+    assert model.predict(_calendar(dates[-1] + pd.Timedelta(days=7))).iloc[0] == expected
+
+
+def test_relative_weekday_median_averages_at_exact_unequal_weight_boundary():
+    dates = pd.date_range("2024-01-01", periods=3, freq="W-MON")
+    # The amount 2 has the same weight as both observations of 4 combined.
+    model = RecentWeekday("purchase", 21, estimator="relative_median").fit(_history(dates, [4, 2, 4]))
+    assert model.predict(_calendar("2024-01-22")).iloc[0] == 3
+
+
+@pytest.mark.parametrize("half_life", [7, 0.001])
+def test_weekday_median_applies_recency_to_sorted_amounts(half_life):
+    dates = pd.date_range("2024-01-01", periods=3, freq="W-MON")
+    model = RecentWeekday("purchase", 21, estimator="median", half_life=half_life)
+    model.fit(_history(dates, [40, 20, 10]))
+    assert model.predict(_calendar("2024-01-22")).iloc[0] == 10
+
+
+def test_weekday_median_preserves_weight_difference_lost_by_float_cumulative_sum():
+    dates = pd.date_range("2024-01-01", periods=55, freq="W-MON")
+    # All older weights add up to 1 - 2**-54, strictly less than the newest weight of 1.
+    model = RecentWeekday("purchase", 385, estimator="median", half_life=7)
+    model.fit(_history(dates, [0] * 54 + [100]))
+    assert model.predict(_calendar(dates[-1] + pd.Timedelta(days=7))).iloc[0] == 100
+
+
+def test_relative_weekday_median_preserves_small_weight_between_equal_weights():
+    dates = pd.to_datetime(["2024-01-08", "2024-01-15", "2024-01-22"])
+    middle = 2.0**-499
+    # Both outer amounts carry equal weight, so the middle amount decides the median.
+    model = RecentWeekday("purchase", 28, estimator="relative_median", half_life=0.007)
+    model.fit(_history(dates, [middle, 2.0**-500, 2.0**500]))
+    assert model.predict(_calendar("2024-01-29")).iloc[0] == middle
+
+
+@pytest.mark.parametrize("estimator", ["median", "relative_median"])
+def test_weekday_median_preserves_smallest_positive_singleton(estimator):
+    amount = np.finfo(float).smallest_subnormal
+    dates = pd.to_datetime(["2024-01-01"])
+    model = RecentWeekday("purchase", 7, estimator=estimator).fit(_history(dates, [amount]))
+    assert model.predict(_calendar("2024-01-08")).iloc[0] == amount
+
+
+@pytest.mark.parametrize(
+    ("lower", "upper", "expected"),
+    [
+        pytest.param(float.fromhex("0x1p-1074"), float.fromhex("0x2p-1074"), float.fromhex("0x2p-1074"), id="subnormal"),
+        pytest.param(1e308, 1.5e308, 1.25e308, id="large"),
+    ],
+)
+def test_weekday_median_averages_extreme_amounts(lower, upper, expected):
+    dates = pd.date_range("2024-01-01", periods=2, freq="W-MON")
+    model = RecentWeekday("purchase", 14, estimator="median").fit(_history(dates, [lower, upper]))
+    assert model.predict(_calendar("2024-01-15")).iloc[0] == expected
+
+
 def test_relative_weekday_median_handles_exact_zeros_and_missing_weekdays():
     dates = pd.to_datetime(["2024-01-01", "2024-01-02", "2024-01-08", "2024-01-09"])
     history = _history(dates, [0, 0, 50, 0])
