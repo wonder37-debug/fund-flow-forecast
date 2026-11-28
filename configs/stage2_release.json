@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "source_git_commit": "659623864e8f26bad6f6069c104cd9159cb07fe2",
+  "freeze_lf_sha256": "16db07e426ed9b2cc52cde7b752f02f862afd4447b0612c144f74aceef70d085",
+  "holdout_manifest_lf_sha256": "02e130b7ec004492fb2a0c9fc5588e2977fd5c3ff01a0fddc3d0390b7fd4ea08"
+}
