@@ -1,0 +1,243 @@
+{
+  "role": "holdout",
+  "git_commit": "8bd80d0282ae7b3c94bb8b5b2fa4a85b76f428a9",
+  "plan_sha256": "bec7366b026d33ddc725a7939c2fb5513cea3a2f0d17f34cebd91dcf0a0803d6",
+  "freeze_file_sha256": "a1f38d78d7a47312e720e1c07d1e05b8bd5e858c71f194f61004d6a43cac6dce",
+  "selected_model": "blend_equal",
+  "candidates": [
+    {
+      "id": "B1",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B1",
+        "redeem": "B1"
+      }
+    },
+    {
+      "id": "B3",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B3",
+        "redeem": "B3"
+      }
+    },
+    {
+      "id": "B4",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B4",
+        "redeem": "B4"
+      }
+    },
+    {
+      "id": "B5",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B5",
+        "redeem": "B5"
+      }
+    },
+    {
+      "id": "B3+B4",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B3",
+        "redeem": "B4"
+      }
+    },
+    {
+      "id": "B3+B5",
+      "kind": "baseline",
+      "specs": {
+        "purchase": "B3",
+        "redeem": "B5"
+      }
+    },
+    {
+      "id": "ewm_weekday",
+      "kind": "recent_weekday",
+      "params": {
+        "estimator": "mean",
+        "half_life": 14
+      },
+      "target_params": {
+        "purchase": {
+          "days": 28
+        },
+        "redeem": {
+          "days": 84
+        }
+      }
+    },
+    {
+      "id": "median_weekday",
+      "kind": "recent_weekday",
+      "params": {
+        "estimator": "median"
+      },
+      "target_params": {
+        "purchase": {
+          "days": 28
+        },
+        "redeem": {
+          "days": 84
+        }
+      }
+    },
+    {
+      "id": "trimmed_weekday",
+      "kind": "recent_weekday",
+      "params": {
+        "estimator": "trimmed"
+      },
+      "target_params": {
+        "purchase": {
+          "days": 28
+        },
+        "redeem": {
+          "days": 84
+        }
+      }
+    },
+    {
+      "id": "relative_median_weekday",
+      "kind": "recent_weekday",
+      "params": {
+        "estimator": "relative_median"
+      },
+      "target_params": {
+        "purchase": {
+          "days": 28
+        },
+        "redeem": {
+          "days": 84
+        }
+      }
+    },
+    {
+      "id": "level_weekday",
+      "kind": "level_weekday",
+      "params": {
+        "level_days": 28,
+        "profile_days": 84,
+        "trend": false
+      }
+    },
+    {
+      "id": "level_trend",
+      "kind": "level_weekday",
+      "params": {
+        "level_days": 28,
+        "profile_days": 84,
+        "trend": true
+      }
+    },
+    {
+      "id": "trend_purchase_b5",
+      "kind": "target_mix",
+      "members": {
+        "purchase": "level_trend",
+        "redeem": "B5"
+      }
+    },
+    {
+      "id": "cal_holiday",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {
+        "holidays": true,
+        "makeup": "weekday",
+        "edges": false,
+        "month_end": false
+      }
+    },
+    {
+      "id": "cal_workday",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {
+        "holidays": true,
+        "makeup": "workday",
+        "edges": false,
+        "month_end": false
+      }
+    },
+    {
+      "id": "cal_edges",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {
+        "holidays": true,
+        "makeup": "workday",
+        "edges": true,
+        "month_end": false
+      }
+    },
+    {
+      "id": "cal_month_end",
+      "kind": "calendar_adjusted",
+      "base": "B3+B5",
+      "params": {
+        "holidays": true,
+        "makeup": "workday",
+        "edges": false,
+        "month_end": true
+      }
+    },
+    {
+      "id": "weekly_log_ets",
+      "kind": "weekly_ets",
+      "params": {
+        "days": 120
+      }
+    },
+    {
+      "id": "blend_equal",
+      "kind": "mean_ensemble",
+      "members": [
+        "cal_workday",
+        "trend_purchase_b5"
+      ]
+    }
+  ],
+  "config_sha256": "fb99f65c9c4d2f27a7567db72d3ae553af8e67dbee59910b53e4c30e4798e3c1",
+  "source_sha256": {
+    "experiments/stage2.py": "9bd34355ef0fe5fa4fb55294146ddbae0b1be8016007d79661d1d780f40c75a9",
+    "experiments/baselines.py": "4c47bab7b998d792073135b12d4de4252d2cbd6ec8d88ef272117edf2ef5650f",
+    "src/evaluation.py": "58d0b68be3aff203655c617ed79cc66d9d4847ab4706f60af2f58d0b4910e237",
+    "src/features/calendar.py": "87ad8b52682bcddf19c8c12c3d9e2ddf091c0c7dc9140fd002e02eb27238dbe8",
+    "src/models/baselines.py": "69ec11793ba6005686f2cc59ae8ab9259d2db441246a38f464d6922cca86dce8",
+    "src/models/calendar_adjustment.py": "73f3edb5cda53fc48116d4a98cb7638265597c628afb5dd64dc8ff739f7ae371",
+    "src/models/statistical.py": "d324f6bb1db76426a744450ebb8a369cab03033c3fb0eff73cdf85d59acf8511"
+  },
+  "calendar_sha256": "e590c378df853a03e0b1df9dc8c44a25dda7ec15441e0b600eeece1cd7a3a68b",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "scipy": "1.15.3",
+    "statsmodels": "0.14.5",
+    "pyarrow": "20.0.0"
+  },
+  "development_input": {
+    "sha256": "cb62e899c9a49c14f912c44c6ee23ea401b7ef1a1c836fdc19429fe4b1e7ed3d",
+    "scope_start": "2013-07-01",
+    "scope_end": "2014-07-31",
+    "rows": 396,
+    "serialization": "sorted report_date,purchase,redeem UTF-8 CSV with LF and ISO dates"
+  },
+  "holdout_input": {
+    "sha256": "2896f1d3007e52de193768562af54c64f2f87058ffc62bf17a19a60dc5a6c81f",
+    "scope_start": "2014-08-01",
+    "scope_end": "2014-08-31",
+    "rows": 31,
+    "serialization": "sorted report_date,purchase,redeem UTF-8 CSV with LF and ISO dates"
+  },
+  "holdout_artifact_sha256": {
+    "fold_metrics.csv": "04e5e67d1315ef6f0e83e0ca33306bbe025b06155b76a18d5b114499ad5c2613",
+    "daily_predictions.csv": "adc016a3890e1cddf7ae11ecb7350d6bbd9883f90e1c1641021bf066f4415709",
+    "failures.csv": "b5200c16e748cb484902f281615d958c3a411c47dd40f94fe1cd8a2f42001746",
+    "day_type_metrics.csv": "845376b5180fc946d2408e9de991d518586caee8c3db6ea8ab80ffebaa3e77c8",
+    "horizon_metrics.csv": "b07dd56b6f5e7f3d61403bcef37aa86362d3f27b0d32a6f89409d37b5bdff8b8"
+  }
+}

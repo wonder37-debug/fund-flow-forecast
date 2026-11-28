@@ -1,0 +1,15 @@
+{
+  "analysis": "complete holiday and makeup events forecast from the prior day",
+  "git_head": "455abf82163825c5f02c8a4bf7a50a96a4547a7d",
+  "development_input_end": "2014-07-31",
+  "development_input_sha256": "cb62e899c9a49c14f912c44c6ee23ea401b7ef1a1c836fdc19429fe4b1e7ed3d",
+  "calendar_sha256": "e590c378df853a03e0b1df9dc8c44a25dda7ec15441e0b600eeece1cd7a3a68b",
+  "source_sha256": {
+    "experiments/stage2_events.py": "916b44efcfbc5da56e0a3405ed837cc5676811b30361ab34b9bf615fa3b09890",
+    "src/evaluation.py": "58d0b68be3aff203655c617ed79cc66d9d4847ab4706f60af2f58d0b4910e237",
+    "src/models/baselines.py": "69ec11793ba6005686f2cc59ae8ab9259d2db441246a38f464d6922cca86dce8",
+    "src/models/calendar_adjustment.py": "73f3edb5cda53fc48116d4a98cb7638265597c628afb5dd64dc8ff739f7ae371"
+  },
+  "comparison_count": 9,
+  "duration_seconds": 0.538343199994415
+}

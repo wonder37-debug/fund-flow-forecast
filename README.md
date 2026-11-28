@@ -1,6 +1,6 @@
 # 资金流入流出预测
 
-机器学习课程实践项目。以阿里天池竞赛历史交易为基础，预测 2014 年 9 月全体用户每日申购和赎回总额，金额统一使用分。当前交付阶段一的数据审计、探索性分析和离线基线。
+机器学习课程实践项目。以阿里天池竞赛历史交易为基础，预测 2014 年 9 月全体用户每日申购和赎回总额，金额统一使用分。阶段一建立数据、EDA 和基线，阶段二完成统计模型比较并生成两份 9 月预测。
 
 ## 环境与数据
 
@@ -47,9 +47,21 @@ $python = '.\.venv\Scripts\python.exe'
 | `src/submission.py`、`experiments/` | 提交文件校验与可追踪实验入口 |
 | `tests/`、`results/` | 正确性测试与可复现产出 |
 
+## 阶段二预测
+
+默认使用审查后发布的冻结记录和 8 月评估证据。程序先与 `configs/stage2_release.json` 中钉住的指纹比对，再拟合截至 2014-08-31 的历史。复用仓库中的冻结记录时，使用 Python 3.13.5 和 `requirements.txt` 中的依赖版本。
+
+```powershell
+$python = '.\.venv\Scripts\python.exe'
+& $python -m experiments.stage2_forecast --output-dir data/cache/stage2-repro/september
+```
+
+[阶段二主预测](results/submissions/stage2/stage2_primary.csv) · [备选预测](results/submissions/stage2/stage2_backup.csv) · [特殊日期预测对照](results/submissions/stage2/calendar_comparison.csv)
+
 ## 实验材料
 
 - [数据字典](docs/data_dictionary.md)、[数据质量审计](docs/data_audit.md)
 - [EDA 报告](docs/eda_report.md)、[日历口径](docs/calendar.md)
 - [评估协议](docs/evaluation_protocol.md)、[阶段一结果](docs/stage1_summary.md)
+- [阶段二设计](docs/stage2_design.md)、[阶段二实验](docs/stage2_experiments.md)、[阶段二总结](docs/stage2_summary.md)、[阶段二审查记录](docs/stage2_review.md)
 - [后续研究路线](docs/roadmap.md)
